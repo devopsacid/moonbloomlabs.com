@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+import Horizon from '../components/art/Horizon.astro';
+import Icon from '../components/art/Icon.astro';
+import ServiceArt from '../components/art/ServiceArt.astro';
+import { getDictionary } from '../i18n';
+import { breadcrumbs, service } from '../lib/schema-org';
+import { SITE_URL } from '../config/site';
+import { pagePath, servicePath, SERVICE_KEYS, type Locale, type ServiceKey } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+  serviceKey: ServiceKey;
+}
+const { locale, serviceKey } = Astro.props;
+const d = getDictionary(locale);
+const s = d[`service_${serviceKey}` as const];
+const cards = d.home.services.cards;
+const title = (k: string) => cards.find((c) => c.key === k)?.title ?? k;
+const idx = SERVICE_KEYS.indexOf(serviceKey);
+const related = [1, 2].map((n) => SERVICE_KEYS[(idx + n) % SERVICE_KEYS.length] as ServiceKey);
+const url = `${SITE_URL}${servicePath(locale, serviceKey)}`;
+const crumbs = [
+  { name: d.common.breadcrumbs.home, url: `${SITE_URL}${pagePath(locale, 'home')}` },
+  { name: d.common.breadcrumbs.services, url: `${SITE_URL}${pagePath(locale, 'services')}` },
+  { name: s.h1, url },
+];
+---
+
+<Base
+  locale={locale}
+  pageRef={{ kind: 'service', key: serviceKey }}
+  title={s.seo.title}
+  description={s.seo.description}
+  ogTitle={s.og.title}
+  ogDescription={s.og.description}
+  jsonld={[
+    service({ name: s.h1, description: d.jsonld.services[serviceKey], url, locale }),
+    breadcrumbs(crumbs),
+  ]}
+>
+  <section class="intro surface-night">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li>
+            <a href={pagePath(locale, 'home')}>{d.common.breadcrumbs.home}</a>
+          </li>
+          <li>
+            <a href={pagePath(locale, 'services')}>{d.common.breadcrumbs.services}</a>
+          </li>
+          <li>
+            <span aria-current="page">{s.h1}</span>
+          </li>
+        </ol>
+      </nav>
+      <div class="intro__grid intro__grid--art" style="margin-top: var(--space-6)">
+        <div>
+          <Icon name={serviceKey} size={56} class="icon" />
+          <h1 style="margin-top: var(--space-4)">{s.h1}</h1>
+          <p class="lead">{s.intro}</p>
+          <div class="btn-row">
+            <a class="btn" href={`${pagePath(locale, 'contact')}#form`}>
+              {d.common.nav.cta}
+            </a>
+            <a class="btn btn--secondary" href={`${pagePath(locale, 'home')}#how-it-works`}>
+              {d.common.nav.how_it_works}
+            </a>
+          </div>
+        </div>
+        <ServiceArt name={serviceKey} class="intro__art" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section surface-night-deep" aria-labelledby="problem-title">
+    <div class="container">
+      <div class="reading">
+        <h2 id="problem-title">{s.problem.title}</h2>
+        <p class="lead" style="margin-top: var(--space-5)">
+          {s.problem.body}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <Horizon />
+
+  <section
+    class="section surface-dawn"
+    aria-labelledby="overnight-title"
+    style="padding-top: var(--space-7)"
+  >
+    <div class="container panel">
+      <h2 id="overnight-title">{s.overnight.title}</h2>
+      <ul class="leaf-list reading" role="list">
+        {s.overnight.items.map((i) => (
+          <li>{i}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section surface-dawn-alt">
+    <div class="container two-col">
+      <div class="panel">
+        <h2>{s.after.title}</h2>
+        <p>{s.after.body}</p>
+      </div>
+      <div class="panel">
+        <h2>{s.fit.title}</h2>
+        <ul class="leaf-list" role="list">
+          {s.fit.items.map((i) => (
+            <li>{i}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section surface-sunrise cta-band" aria-labelledby="cta-title">
+    <div class="container">
+      <nav aria-label={d.common.breadcrumbs.services}>
+        <ul class="related" role="list">
+          {related.map((k) => (
+            <li>
+              <a href={servicePath(locale, k)}>
+                <Icon name={k} size={28} class="icon" />
+                {title(k)}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <h2 id="cta-title">{s.cta.title}</h2>
+      <div class="btn-row" style="margin-top: var(--space-6)">
+        <a class="btn" href={`${pagePath(locale, 'contact')}#form`}>
+          {s.cta.button}
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

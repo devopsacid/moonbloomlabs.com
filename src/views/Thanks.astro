@@ -1,0 +1,61 @@
+---
+import Base from '../layouts/Base.astro';
+import Horizon from '../components/art/Horizon.astro';
+import Bloom from '../components/art/Bloom.astro';
+import { getDictionary } from '../i18n';
+import { pagePath, type Locale } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const d = getDictionary(locale);
+const t = d.thank_you;
+---
+
+<Base
+  locale={locale}
+  pageRef={{ kind: 'page', key: 'thanks' }}
+  title={t.seo.title}
+  description={t.seo.description}
+  ogTitle={t.og.title}
+  ogDescription={t.og.description}
+  noindex
+>
+  <section class="intro surface-night">
+    <div
+      class="container intro__grid"
+      style="grid-template-columns: auto 1fr; justify-content: start; gap: var(--space-6)"
+    >
+      <div style="width:5rem">
+        <Bloom stem={false} />
+      </div>
+      <div>
+        <h1 tabindex="-1">{t.h1}</h1>
+        <p class="lead">{t.body}</p>
+      </div>
+    </div>
+  </section>
+  <Horizon from="950" thin />
+  <section class="section surface-dawn" style="padding-top: var(--space-7)">
+    <div class="container">
+      <div class="reading">
+        <h2>{t.next_title}</h2>
+        <ul class="leaf-list" role="list" style="margin-top: var(--space-5)">
+          {t.next_items.map((i) => (
+            <li>{i}</li>
+          ))}
+        </ul>
+        <div class="btn-row" style="margin-top: var(--space-7)">
+          <a class="btn" href={`${pagePath(locale, 'home')}#how-it-works`}>
+            {t.links.how}
+          </a>
+          <a class="btn btn--secondary" href={pagePath(locale, 'services')}>
+            {t.links.services}
+          </a>
+          <a href={pagePath(locale, 'home')}>{t.links.home}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

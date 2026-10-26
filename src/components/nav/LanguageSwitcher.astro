@@ -1,0 +1,67 @@
+---
+import { LOCALE_META, refPath, type Locale, type PageRef } from '../../i18n/routes';
+import { ACTIVE_LOCALES } from '../../i18n/active';
+import { getDictionary } from '../../i18n';
+import Icon from '../art/Icon.astro';
+
+interface Props {
+  locale: Locale;
+  pageRef: PageRef;
+  variant: 'menu' | 'list';
+}
+const { locale, pageRef, variant } = Astro.props;
+const label = getDictionary(locale).common.lang_switcher.aria_label;
+const target: PageRef = pageRef.kind === 'notFound' ? { kind: 'page', key: 'home' } : pageRef;
+const items = ACTIVE_LOCALES.map((l) => ({
+  l,
+  href: refPath(l, target),
+  name: LOCALE_META[l].name,
+}));
+---
+
+{variant === 'menu' ? (
+  <details class="lang-menu">
+    <summary>
+      <span aria-hidden="true">{LOCALE_META[locale].short}</span>
+      <span class="sr-only">
+        {label}: {LOCALE_META[locale].name}
+      </span>
+      <Icon name="chevron" class="chev" size={12} />
+    </summary>
+    <nav class="lang-menu__panel" aria-label={label}>
+      <ul class="lang-list">
+        {items.map((i) => (
+          <li>
+            {i.l === locale ? (
+              <span aria-current="true" lang={i.l}>
+                {i.name}
+              </span>
+            ) : (
+              <a href={i.href} lang={i.l} hreflang={i.l}>
+                {i.name}
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </details>
+) : (
+  <nav aria-label={label}>
+    <ul class="lang-list">
+      {items.map((i) => (
+        <li>
+          {i.l === locale ? (
+            <span aria-current="true" lang={i.l}>
+              {i.name}
+            </span>
+          ) : (
+            <a href={i.href} lang={i.l} hreflang={i.l}>
+              {i.name}
+            </a>
+          )}
+        </li>
+      ))}
+    </ul>
+  </nav>
+)}

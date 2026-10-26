@@ -1,0 +1,215 @@
+---
+// One header illustration per service, same visual language: night sky, ridge, line art + petal accent.
+import type { ServiceKey } from '../../i18n/routes';
+interface Props {
+  name: ServiceKey;
+  class?: string;
+}
+const { name, class: className } = Astro.props;
+const stars = [
+  [60, 40, 1.6],
+  [150, 70, 1.2],
+  [250, 30, 1.8],
+  [330, 90, 1.2],
+  [430, 50, 1.6],
+  [20, 120, 1.2],
+];
+---
+
+<svg
+  class={className}
+  viewBox="0 0 480 300"
+  width="480"
+  height="300"
+  aria-hidden="true"
+  focusable="false"
+  fill="none"
+  stroke="var(--color-moon-100)"
+  stroke-width="1.8"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  {stars.map(([x, y, r]) => (
+    <circle cx={x} cy={y} r={r} fill="var(--color-mist-300)" stroke="none" opacity="0.7" />
+  ))}
+  <path
+    d="M395 34a22 22 0 1 0 22 36 18 18 0 0 1-22-36Z"
+    fill="var(--color-moon-100)"
+    stroke="none"
+    opacity="0.9"
+  ></path>
+  <path
+    d="M0 262C80 246 150 272 240 258S400 244 480 260V300H0Z"
+    fill="var(--color-night-900)"
+    stroke="none"
+  ></path>
+  <path
+    d="M0 262C80 246 150 272 240 258S400 244 480 260"
+    stroke="var(--color-night-500)"
+    opacity="0.6"
+  ></path>
+
+  {name === 'rag_ai_search' && (
+    <g>
+      <rect
+        x="110"
+        y="70"
+        width="130"
+        height="170"
+        rx="6"
+        transform="rotate(-6 175 155)"
+        opacity="0.45"
+      />
+      <path d="M170 60h110l36 36v150H170z" fill="var(--color-night-950)" />
+      <path d="M280 60v36h36" />
+      <path d="M194 128h100M194 156h72M194 184h100M194 212h52" opacity="0.7" />
+      <path d="M194 156h72" stroke="var(--color-apricot-300)" stroke-width="3" />
+      <path
+        d="M300 184l7 14 14 7-14 7-7 14-7-14-14-7 14-7z"
+        fill="var(--color-apricot-300)"
+        stroke="none"
+      />
+      <path
+        d="M318 246c0-18 10-30 26-34 0 16-8 30-26 34Z"
+        fill="var(--color-leaf-500)"
+        stroke="none"
+      />
+    </g>
+  )}
+  {name === 'knowledge_management' && (
+    <g>
+      <path d="M60 262h360" opacity="0.5" />
+      <path d="M240 262V150" />
+      <path
+        d="M240 190c0-34 24-50 60-50 0 36-24 52-60 50Z"
+        fill="var(--color-leaf-500)"
+        stroke="none"
+      />
+      <path
+        d="M240 168c0-26-18-38-46-38 0 28 18 40 46 38Z"
+        fill="var(--color-leaf-500)"
+        stroke="none"
+        opacity="0.8"
+      />
+      <circle cx="240" cy="140" r="9" fill="var(--color-petal-300)" stroke="none" />
+      <path
+        d="M240 262v10M240 272c-30 10-60 4-90 22M240 272c30 10 60 4 90 22M240 272v26M200 281c-12 6-26 4-40 14M280 281c12 6 26 4 40 14"
+        stroke="var(--color-mist-300)"
+        opacity="0.8"
+      />
+      <circle cx="150" cy="294" r="4" fill="var(--color-apricot-300)" stroke="none" />
+      <circle cx="330" cy="294" r="4" fill="var(--color-apricot-300)" stroke="none" />
+    </g>
+  )}
+  {name === 'chatbots_ai_assistants' && (
+    <g>
+      <path
+        d="M90 90c0-14 10-24 24-24h140c14 0 24 10 24 24v70c0 14-10 24-24 24H160l-44 36v-36h-2c-14 0-24-10-24-24Z"
+        fill="var(--color-night-950)"
+      />
+      <path d="M130 100c28 0 46-12 52-34" stroke="var(--color-leaf-500)" stroke-width="2.4" />
+      <path d="M130 124h110M130 148h70" opacity="0.7" />
+      <path
+        d="M236 150h104c14 0 24 10 24 24v52c0 14-10 24-24 24h-6v34l-40-34h-58c-14 0-24-10-24-24v-4"
+        fill="var(--color-night-900)"
+        stroke="var(--color-petal-300)"
+      />
+      <path
+        d="M280 196c0-18 12-26 30-26 0 18-12 26-30 26Z"
+        fill="var(--color-petal-300)"
+        stroke="none"
+      />
+      <circle cx="316" cy="214" r="3.200" fill="var(--color-apricot-300)" stroke="none" />
+    </g>
+  )}
+  {name === 'gamification' && (
+    <g>
+      <path d="M120 262h60v-22h60v-22h60v-22h60" stroke="var(--color-mist-300)" opacity="0.75" />
+      <path d="M330 196V92" />
+      <path
+        d="M330 186c-34 0-56-16-56-44 34 0 56 16 56 44Z"
+        fill="var(--color-leaf-500)"
+        stroke="none"
+      />
+      <path
+        d="M330 150c34 0 56-16 56-44-34 0-56 16-56 44Z"
+        fill="var(--color-leaf-500)"
+        stroke="none"
+        opacity="0.85"
+      />
+      <path
+        d="M330 92c-24-16-24-48 0-64 24 16 24 48 0 64Z"
+        fill="var(--color-petal-300)"
+        stroke="none"
+      />
+      <path d="M330 92c-12-14-12-40 0-56" stroke="var(--color-bloom-700)" opacity="0.6" />
+      <path
+        d="M150 220l6 12 12 6-12 6-6 12-6-12-12-6 12-6z"
+        fill="var(--color-apricot-300)"
+        stroke="none"
+      />
+      <path
+        d="M212 172l5 10 10 5-10 5-5 10-5-10-10-5 10-5z"
+        fill="var(--color-apricot-300)"
+        stroke="none"
+        opacity="0.8"
+      />
+    </g>
+  )}
+  {name === 'ai_integration' && (
+    <g>
+      <path
+        d="M60 246L250 130 420 96"
+        stroke-width="7"
+        stroke="var(--color-mist-300)"
+        opacity="0.8"
+      />
+      <path
+        d="M150 200l20 28M176 184l20 28M202 168l20 28"
+        stroke="var(--color-apricot-300)"
+        stroke-width="3"
+      />
+      <path d="M200 190C210 130 250 96 300 74" stroke-width="5" stroke="var(--color-leaf-500)" />
+      <path
+        d="M300 74c10-30 36-44 62-46 0 30-18 50-62 46Z"
+        fill="var(--color-leaf-500)"
+        stroke="none"
+      />
+      <path
+        d="M262 100c-8-24 0-42 20-54 12 22 6 44-20 54Z"
+        fill="var(--color-petal-300)"
+        stroke="none"
+      />
+      <circle cx="400" cy="100" r="5" fill="var(--color-petal-300)" stroke="none" />
+    </g>
+  )}
+  {name === 'devops_cloud' && (
+    <g>
+      <path
+        d="M130 262V86M250 262V86M370 262V86M100 130h300M100 190h300M100 236h300"
+        opacity="0.8"
+      />
+      <path
+        d="M130 262c0-50 120-50 120-100s-110-50-110-110"
+        stroke="var(--color-leaf-500)"
+        stroke-width="3.2"
+      />
+      <path
+        d="M200 206c26 0 44-10 50-34-26 0-44 12-50 34ZM160 128c20 0 34-8 40-26-20 0-34 10-40 26Z"
+        fill="var(--color-leaf-500)"
+        stroke="none"
+      />
+      <path
+        d="M140 52c-10-16-4-34 12-40 8 16 2 34-12 40Z"
+        fill="var(--color-petal-300)"
+        stroke="none"
+      />
+      <path
+        d="M300 60c0-14 10-24 24-24 8 0 14 4 18 10 12-2 24 6 24 18 0 10-8 18-18 18h-42c-8 0-14-6-14-14s6-14 14-14Z"
+        stroke="var(--color-mist-300)"
+        opacity="0.7"
+        transform="translate(40 -6)"
+      />
+    </g>
+  )}
+</svg>

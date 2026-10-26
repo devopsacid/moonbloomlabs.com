@@ -1,0 +1,257 @@
+---
+// Night scene. Mobile/tablet: moon + stars top right, hills along the bottom with one bud.
+// Desktop (>= 64rem): a full-hero meadow with a large crescent and moonflowers at different stages.
+const stars = [
+  [30, 150, 1.8, 0.8],
+  [96, 90, 1.4, 0.6],
+  [150, 40, 1.8, 0.7],
+  [60, 30, 1.2, 0.5],
+  [120, 170, 1.4, 0.5],
+];
+const lgStars = [
+  [70, 60, 2.4, 0.8],
+  [170, 30, 1.8, 0.6],
+  [470, 50, 2.2, 0.8],
+  [520, 150, 1.6, 0.6],
+  [60, 190, 1.8, 0.7],
+  [120, 290, 2.2, 0.7],
+  [500, 270, 1.8, 0.6],
+  [400, 310, 1.4, 0.5],
+  [330, 22, 1.4, 0.5],
+];
+type Stage = 'closed' | 'half' | 'open';
+// x, y = flower centre, s = scale (200-unit flower box), stem = stem bottom y
+const flowers: { x: number; y: number; s: number; stage: Stage; stem: number; rot: number }[] = [
+  { x: 905, y: 452, s: 0.5, stage: 'closed', stem: 690, rot: -6 },
+  { x: 1030, y: 405, s: 0.72, stage: 'half', stem: 690, rot: 4 },
+  { x: 1185, y: 350, s: 1.05, stage: 'open', stem: 690, rot: -3 },
+  { x: 1335, y: 430, s: 0.62, stage: 'open', stem: 690, rot: 8 },
+  { x: 1265, y: 520, s: 0.4, stage: 'closed', stem: 690, rot: 0 },
+];
+const petals = [0, 1, 2, 3, 4];
+const tf = (a: number, sx: number, sy: number) =>
+  `translate(100 100) rotate(${a}) scale(${sx} ${sy}) translate(-100 -100)`;
+const outerT = (i: number, st: Stage) =>
+  st === 'closed' ? tf(0, 0.42, 0.62) : st === 'half' ? tf(i * 36, 0.72, 0.82) : tf(i * 72, 1, 1);
+const innerT = (i: number, st: Stage) =>
+  st === 'closed'
+    ? tf(0, 0.42, 0.62)
+    : st === 'half'
+      ? tf((36 + i * 72) * 0.5, 0.72, 0.82)
+      : tf(36 + i * 72, 1, 1);
+---
+
+<svg
+  class="hero__sky"
+  viewBox="0 0 300 220"
+  width="300"
+  height="220"
+  aria-hidden="true"
+  focusable="false"
+>
+  {stars.map(([x, y, r, o]) => (
+    <circle cx={x} cy={y} r={r} fill="var(--color-mist-300)" opacity={o} />
+  ))}
+  <circle cx="226" cy="84" r="62" fill="var(--color-moon-100)" opacity="0.035"></circle>
+  <path
+    d="M226 44a40 40 0 1 0 38 66 34 34 0 0 1-38-66Z"
+    fill="var(--color-moon-100)"
+    transform="translate(-4 -2)"
+  ></path>
+</svg>
+
+<!-- mobile: compact hills sized to a phone-width box, nothing important is cropped -->
+<svg
+  class="hero__hills hero__hills--m"
+  viewBox="0 0 520 140"
+  width="520"
+  height="140"
+  preserveAspectRatio="xMidYMax slice"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d="M0 70C80 50 150 66 230 56S400 36 520 52V140H0Z" fill="var(--color-night-900)"></path>
+  <path
+    d="M0 70C80 50 150 66 230 56S400 36 520 52"
+    fill="none"
+    stroke="var(--color-mist-300)"
+    stroke-opacity="0.4"
+    stroke-width="1.5"
+  ></path>
+  <path d="M0 96C100 76 190 100 290 90S450 70 520 84V140H0Z" fill="#1a2152"></path>
+  <path
+    d="M0 120C110 104 220 124 330 114S470 106 520 112V140H0Z"
+    fill="var(--color-night-800)"
+  ></path>
+  <g transform="translate(380 52) scale(0.8)">
+    <path
+      d="M0 0C-1 -14 1 -26 0 -40"
+      stroke="var(--color-leaf-500)"
+      stroke-width="3"
+      fill="none"
+      stroke-linecap="round"
+    ></path>
+    <path d="M0 -36C-9 -48 -8 -64 0 -78C8 -64 9 -48 0 -36Z" fill="var(--color-petal-100)"></path>
+    <path
+      d="M0 -36C-9 -48 -8 -64 0 -78C8 -64 9 -48 0 -36Z"
+      fill="var(--color-petal-300)"
+      transform="rotate(-14 0 -36)"
+      opacity="0.9"
+    ></path>
+    <path
+      d="M0 -36C-9 -48 -8 -64 0 -78C8 -64 9 -48 0 -36Z"
+      fill="var(--color-petal-300)"
+      transform="rotate(14 0 -36)"
+      opacity="0.9"
+    ></path>
+  </g>
+</svg>
+
+<!-- tablet: wide hills -->
+<svg
+  class="hero__hills hero__hills--t"
+  viewBox="0 0 1440 240"
+  width="1440"
+  height="240"
+  preserveAspectRatio="xMidYMax slice"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path
+    d="M0 120C160 84 300 110 460 96S760 60 940 88 1260 104 1440 78V240H0Z"
+    fill="var(--color-night-900)"
+  ></path>
+  <path
+    d="M0 120C160 84 300 110 460 96S760 60 940 88 1260 104 1440 78"
+    fill="none"
+    stroke="var(--color-mist-300)"
+    stroke-opacity="0.4"
+    stroke-width="1.5"
+  ></path>
+  <path
+    d="M0 168C200 130 360 176 560 158S900 118 1100 150 1340 168 1440 146V240H0Z"
+    fill="#1a2152"
+  ></path>
+  <path
+    d="M0 204C220 176 420 214 660 200S1080 170 1260 192 1400 204 1440 196V240H0Z"
+    fill="var(--color-night-800)"
+  ></path>
+  <g transform="translate(1010 92)">
+    <path
+      d="M0 0C-1 -14 1 -26 0 -40"
+      stroke="var(--color-leaf-500)"
+      stroke-width="3"
+      fill="none"
+      stroke-linecap="round"
+    ></path>
+    <path d="M0 -36C-9 -48 -8 -64 0 -78C8 -64 9 -48 0 -36Z" fill="var(--color-petal-100)"></path>
+    <path
+      d="M0 -36C-9 -48 -8 -64 0 -78C8 -64 9 -48 0 -36Z"
+      fill="var(--color-petal-300)"
+      transform="rotate(-14 0 -36)"
+      opacity="0.9"
+    ></path>
+    <path
+      d="M0 -36C-9 -48 -8 -64 0 -78C8 -64 9 -48 0 -36Z"
+      fill="var(--color-petal-300)"
+      transform="rotate(14 0 -36)"
+      opacity="0.9"
+    ></path>
+  </g>
+</svg>
+
+<!-- desktop: moon and stars live only in the right-hand area, never behind text -->
+<div class="hero__sky-lg" aria-hidden="true">
+  <svg
+    class="hero__stars"
+    viewBox="0 0 560 340"
+    width="560"
+    height="340"
+    preserveAspectRatio="xMidYMid slice"
+    focusable="false"
+  >
+    {lgStars.map(([x, y, r, o]) => (
+      <circle cx={x} cy={y} r={r} fill="var(--color-mist-300)" opacity={o} />
+    ))}
+  </svg>
+  <svg class="hero__moon" viewBox="0 0 120 120" width="120" height="120" focusable="false">
+    <path
+      d="M55.76 20.23A40 40 0 1 0 93.9 81.23A36 36 0 0 1 55.76 20.23Z"
+      fill="var(--color-moon-100)"
+    ></path>
+  </svg>
+</div>
+
+<!-- desktop: full-hero meadow scene -->
+<svg
+  class="hero__scene"
+  viewBox="0 0 1440 800"
+  width="1440"
+  height="800"
+  preserveAspectRatio="xMidYMax meet"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path
+    d="M0 520C200 490 380 520 560 505S900 470 1100 500 1340 520 1440 495V800H0Z"
+    fill="var(--color-night-900)"
+  ></path>
+  <path
+    d="M0 520C200 490 380 520 560 505S900 470 1100 500 1340 520 1440 495"
+    fill="none"
+    stroke="var(--color-mist-300)"
+    stroke-opacity="0.4"
+    stroke-width="1.5"
+  ></path>
+  {flowers.map((f) => (
+    <g transform={`translate(${f.x} ${f.y}) rotate(${f.rot}) scale(${f.s}) translate(-100 -100)`}>
+      <path
+        d={`M100 104C100 ${((f.stem - f.y) / f.s) * 0.45 + 100} 94 ${((f.stem - f.y) / f.s) * 0.8 + 100} 100 ${(f.stem - f.y) / f.s + 100}`}
+        fill="none"
+        stroke="var(--color-leaf-500)"
+        stroke-width="4"
+        stroke-linecap="round"
+      />
+      <path
+        d={`M98 ${((f.stem - f.y) / f.s) * 0.62 + 100}C80 ${((f.stem - f.y) / f.s) * 0.62 + 100} 64 ${((f.stem - f.y) / f.s) * 0.5 + 100} 60 ${((f.stem - f.y) / f.s) * 0.38 + 100}C80 ${((f.stem - f.y) / f.s) * 0.38 + 100} 94 ${((f.stem - f.y) / f.s) * 0.48 + 100} 98 ${((f.stem - f.y) / f.s) * 0.62 + 100}Z`}
+        fill="var(--color-leaf-500)"
+      />
+      {petals.map((i) => (
+        <path
+          d="M100 100C86 78 88 40 100 22C112 40 114 78 100 100Z"
+          fill="var(--color-petal-100)"
+          stroke="var(--color-bloom-700)"
+          stroke-opacity="0.6"
+          stroke-width={1.5 / f.s}
+          stroke-linejoin="round"
+          transform={outerT(i, f.stage)}
+        />
+      ))}
+      {petals.map((i) => (
+        <path
+          d="M100 100C91 84 92 62 100 48C108 62 109 84 100 100Z"
+          fill="var(--color-petal-300)"
+          stroke="var(--color-bloom-700)"
+          stroke-opacity="0.6"
+          stroke-width={1.5 / f.s}
+          stroke-linejoin="round"
+          transform={innerT(i, f.stage)}
+        />
+      ))}
+      {f.stage !== 'closed' && <circle cx="100" cy="100" r="9" fill="var(--color-apricot-300)" />}
+    </g>
+  ))}
+  <path d="M0 640C240 600 480 650 760 630S1180 585 1440 620V800H0Z" fill="#1a2152"></path>
+  <path
+    d="M560 800C640 740 760 700 900 690S1180 660 1300 628"
+    fill="none"
+    stroke="var(--color-mist-300)"
+    stroke-opacity="0.25"
+    stroke-width="3"
+    stroke-linecap="round"
+  ></path>
+  <path
+    d="M0 730C300 700 560 745 860 728S1260 700 1440 722V800H0Z"
+    fill="var(--color-night-800)"
+  ></path>
+</svg>

@@ -1,0 +1,76 @@
+---
+import { getDictionary } from '../../i18n';
+import { pagePath, type Locale, type PageKey, type PageRef } from '../../i18n/routes';
+import Mark from '../art/Mark.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+interface Props {
+  locale: Locale;
+  pageRef: PageRef;
+  showCta?: boolean;
+}
+const { locale, pageRef, showCta = true } = Astro.props;
+const c = getDictionary(locale).common;
+const current: PageKey | null =
+  pageRef.kind === 'page' ? pageRef.key : pageRef.kind === 'service' ? 'services' : null;
+const links = [
+  { key: 'how', label: c.nav.how_it_works, href: `${pagePath(locale, 'home')}#how-it-works` },
+  { key: 'services', label: c.nav.services, href: pagePath(locale, 'services') },
+  { key: 'about', label: c.nav.about, href: pagePath(locale, 'about') },
+  { key: 'contact', label: c.nav.contact, href: pagePath(locale, 'contact') },
+];
+const contactHref = pagePath(locale, 'contact');
+---
+
+<header class="site-header surface-night" data-testid="site-header">
+  <div class="container site-header__row">
+    <a class="logo" href={pagePath(locale, 'home')} aria-label={c.logo_alt}>
+      <Mark />
+      <span>{c.brand_name}</span>
+    </a>
+    <div class="site-header__nav desktop-only">
+      <nav aria-label={c.nav.aria_label}>
+        <ul class="nav-list">
+          {links.map((l) => (
+            <li>
+              <a href={l.href} aria-current={l.key === current ? 'page' : undefined}>
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <LanguageSwitcher locale={locale} pageRef={pageRef} variant="menu" />
+      {showCta && (
+        <a class="btn" href={`${contactHref}#form`} data-testid="header-cta">
+          {c.nav.cta}
+        </a>
+      )}
+    </div>
+    <details class="menu mobile-only" data-menu>
+      <summary data-testid="nav-toggle">
+        <span class="menu__open">{c.nav.menu_open}</span>
+        <span class="menu__close">{c.nav.menu_close}</span>
+      </summary>
+      <div class="menu__panel">
+        <nav aria-label={c.nav.aria_label}>
+          <ul class="nav-list">
+            {links.map((l) => (
+              <li>
+                <a href={l.href} aria-current={l.key === current ? 'page' : undefined}>
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <LanguageSwitcher locale={locale} pageRef={pageRef} variant="list" />
+        {showCta && (
+          <a class="btn" href={`${contactHref}#form`}>
+            {c.nav.cta}
+          </a>
+        )}
+      </div>
+    </details>
+  </div>
+</header>

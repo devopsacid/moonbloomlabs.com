@@ -1,0 +1,22 @@
+---
+// Decorative gradient band between night and dawn. aria-hidden, carries no text.
+interface Props {
+  from?: '800' | '950';
+  thin?: boolean;
+}
+const { from = '800', thin = false } = Astro.props;
+---
+
+<div
+  class:list={['horizon', thin && 'horizon--thin', from === '950' && 'horizon--from-950']}
+  aria-hidden="true"
+>
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false">
+    <path
+      d="M0 70C220 30 400 78 640 60S1040 20 1240 52 1400 70 1440 60V120H0Z"
+      fill="var(--color-petal-100)"
+      opacity="0.35"
+    ></path>
+    <path d="M0 96C260 64 460 104 720 90S1160 66 1440 92V120H0Z" fill="var(--color-dawn-50)"></path>
+  </svg>
+</div>

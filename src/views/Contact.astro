@@ -1,0 +1,201 @@
+---
+import Base from '../layouts/Base.astro';
+import Horizon from '../components/art/Horizon.astro';
+import { getDictionary, rich } from '../i18n';
+import { webPage } from '../lib/schema-org';
+import { SITE_URL, TURNSTILE_SITEKEY } from '../config/site';
+import { LOCALES, LOCALE_META, pagePath, type Locale } from '../i18n/routes';
+import { ACTIVE_LOCALES } from '../i18n/active';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const d = getDictionary(locale);
+const c = d.contact;
+const f = c.form;
+const v = c.validation;
+const MAX = 5000;
+const MIN = 10;
+const langs = LOCALES.filter((l) => ACTIVE_LOCALES.includes(l));
+const messages = {
+  summary: v.form_errors_summary,
+  name_required: v.name_required,
+  email_required: v.email_required,
+  email_invalid: v.email_invalid,
+  idea_required: v.idea_required,
+  idea_too_short: v.idea_too_short,
+  idea_too_long: v.idea_too_long.replace('{max}', String(MAX)),
+  language_required: v.language_required,
+  success_title: c.status.success_title,
+  success_body: c.status.success_body,
+  failure_title: c.status.failure_title,
+  failure_body: c.status.failure_body,
+  rate_limited: c.status.rate_limited,
+  submitting: f.submitting,
+  submit: f.submit,
+};
+const url = `${SITE_URL}${pagePath(locale, 'contact')}`;
+const field = (id: string) => `hint-${id} err-${id}`;
+---
+
+<Base
+  locale={locale}
+  pageRef={{ kind: 'page', key: 'contact' }}
+  title={c.seo.title}
+  description={c.seo.description}
+  ogTitle={c.og.title}
+  ogDescription={c.og.description}
+  showCta={false}
+  jsonld={[webPage('ContactPage', c.h1, url, locale)]}
+>
+  <section class="intro surface-night" style="padding-bottom: var(--space-8)">
+    <div class="container">
+      <h1>{c.h1}</h1>
+      <p class="lead">{c.intro}</p>
+    </div>
+  </section>
+  <Horizon from="950" thin />
+  <section class="section surface-dawn" style="padding-top: var(--space-7)">
+    <div class="container contact-grid">
+      <div>
+        <div
+          id="form-errors"
+          class="status"
+          role="alert"
+          tabindex="-1"
+          hidden
+          data-testid="error-summary"
+        ></div>
+        <div id="form-status" role="status" aria-live="polite" class="sr-only"></div>
+        <form
+          id="form"
+          class="form"
+          method="post"
+          action="/api/contact.php"
+          aria-label={f.aria_label}
+          data-testid="contact-form"
+          data-messages={JSON.stringify(messages)}
+          data-max={MAX}
+          data-min={MIN}
+        >
+          <p class="small" style="color: var(--color-dusk-600)">
+            {f.required_hint}
+          </p>
+          <div class="field">
+            <label for="f-name">{f.name.label}</label>
+            <input
+              id="f-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+              maxlength="100"
+              placeholder={f.name.placeholder}
+              aria-describedby={`err-name`}
+            />
+            <p class="error" id="err-name"></p>
+          </div>
+          <div class="field">
+            <label for="f-email">{f.email.label}</label>
+            <span class="hint" id="hint-email">
+              {f.email.help}
+            </span>
+            <input
+              id="f-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              maxlength="254"
+              placeholder={f.email.placeholder}
+              aria-describedby={field('email')}
+            />
+            <p class="error" id="err-email"></p>
+          </div>
+          <div class="field">
+            <label for="f-company">{f.company.label}</label>
+            <input
+              id="f-company"
+              name="company"
+              type="text"
+              autocomplete="organization"
+              maxlength="150"
+              placeholder={f.company.placeholder}
+            />
+          </div>
+          <div class="field">
+            <label for="f-idea">{f.idea.label}</label>
+            <span class="hint" id="hint-idea">
+              {f.idea.help}
+            </span>
+            <textarea
+              id="f-idea"
+              name="idea"
+              rows="8"
+              required
+              minlength={MIN}
+              maxlength={MAX}
+              placeholder={f.idea.placeholder}
+              aria-describedby={field('idea')}
+            ></textarea>
+            <p class="error" id="err-idea"></p>
+          </div>
+          <fieldset class="field">
+            <legend>{f.language.label}</legend>
+            <div class="radios">
+              {langs.map((l) => (
+                <label>
+                  <input type="radio" name="lang" value={l} checked={l === locale} required />
+                  <span lang={l}>{LOCALE_META[l].name}</span>
+                </label>
+              ))}
+            </div>
+            <p class="error" id="err-lang"></p>
+          </fieldset>
+          <div class="hp" aria-hidden="true">
+            <label>
+              {f.honeypot.label}
+              <input type="text" name="website" tabindex="-1" autocomplete="off" />
+            </label>
+          </div>
+          <input type="hidden" name="ts" value="" />
+          {TURNSTILE_SITEKEY && (
+            <div class="cf-turnstile turnstile-slot" data-sitekey={TURNSTILE_SITEKEY}></div>
+          )}
+          <div class="form-foot">
+            <p
+              class="small"
+              style="color: var(--color-dusk-600)"
+              set:html={rich(f.privacy_note, locale)}
+            />
+            <div>
+              <button class="btn" type="submit" data-testid="submit">
+                {f.submit}
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <aside class="aside" aria-label={c.what_next.title}>
+        <div>
+          <p set:html={rich(c.talk.line, locale)} />
+        </div>
+        <div>
+          <h2>{c.what_next.title}</h2>
+          <ol>
+            {c.what_next.items.map((i) => (
+              <li>{i}</li>
+            ))}
+          </ol>
+        </div>
+      </aside>
+    </div>
+  </section>
+  <Fragment slot="scripts">
+    <script src="../scripts/contact-form.ts"></script>
+    {TURNSTILE_SITEKEY && (
+      <script is:inline async defer src="https://challenges.cloudflare.com/turnstile/v0/api.js" />
+    )}
+  </Fragment>
+</Base>

@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+server/config.php
+.env
+.env.*
+!.env.example
+backup/
+.DS_Store
+*.log
+.lighthouseci/

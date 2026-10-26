@@ -1,0 +1,120 @@
+/* Moonflower. Default for everyone: a static, fully open flower. */
+.bloom {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.bloom .petal {
+  transform-box: view-box;
+  transform-origin: 100px 100px;
+  transform: rotate(var(--a, 0deg));
+}
+.bloom__head,
+.bloom__heart {
+  transform-box: view-box;
+  transform-origin: 100px 100px;
+}
+.bloom[data-state='closed'] .petal {
+  transform: rotate(0deg) scale(0.42, 0.62);
+}
+.bloom[data-state='closed'] .bloom__head {
+  transform: rotate(-40deg);
+}
+.bloom[data-state='closed'] .bloom__heart {
+  opacity: 0;
+  transform: scale(0.4);
+}
+.bloom[data-state='half'] .petal {
+  transform: rotate(calc(var(--a, 0deg) * 0.5)) scale(0.72, 0.82);
+}
+.bloom[data-state='half'] .bloom__head {
+  transform: rotate(-14deg);
+}
+.bloom[data-state='half'] .bloom__heart {
+  opacity: 0.8;
+  transform: scale(0.7);
+}
+
+@keyframes petal-open {
+  from {
+    transform: rotate(0deg) scale(0.42, 0.62);
+  }
+  to {
+    transform: rotate(var(--a, 0deg)) scale(1);
+  }
+}
+@keyframes head-unfurl {
+  from {
+    transform: rotate(-40deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+@keyframes heart-open {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Scroll-driven opening: only where supported and motion is welcome. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .how {
+      view-timeline: --how block;
+    }
+    .how__bloom {
+      view-timeline: --bloomtl block;
+    }
+    .bloom[data-animate] {
+      --tl: --bloomtl;
+    }
+    .bloom[data-animate] .petal,
+    .bloom[data-animate] .bloom__head,
+    .bloom[data-animate] .bloom__heart {
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+      animation-timeline: var(--tl);
+    }
+    .bloom[data-animate] .bloom__head {
+      animation-name: head-unfurl;
+      animation-range: cover 5% cover 50%;
+    }
+    .bloom[data-animate] .petal {
+      animation-name: petal-open;
+    }
+    .bloom[data-animate] .petals--outer .petal {
+      animation-range: cover calc(10% + var(--i) * 3%) cover calc(38% + var(--i) * 3%);
+    }
+    .bloom[data-animate] .petals--inner .petal {
+      animation-range: cover calc(30% + var(--i) * 3%) cover calc(52% + var(--i) * 3%);
+    }
+    .bloom[data-animate] .bloom__heart {
+      animation-name: heart-open;
+      animation-range: cover 48% cover 62%;
+    }
+    @media (min-width: 64rem) {
+      .bloom[data-animate] {
+        --tl: --how;
+      }
+      .bloom[data-animate] .bloom__head {
+        animation-range: cover 20% cover 55%;
+      }
+      .bloom[data-animate] .petals--outer .petal {
+        animation-range: cover calc(20% + var(--i) * 4%) cover calc(44% + var(--i) * 4%);
+      }
+      .bloom[data-animate] .petals--inner .petal {
+        animation-range: cover calc(40% + var(--i) * 4%) cover calc(60% + var(--i) * 4%);
+      }
+      .bloom[data-animate] .bloom__heart {
+        animation-range: cover 65% cover 80%;
+      }
+    }
+  }
+}

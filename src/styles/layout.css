@@ -1,0 +1,92 @@
+.container {
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * var(--space-gutter));
+  margin-inline: auto;
+  padding-inline: var(--space-gutter);
+}
+.section {
+  padding-block: var(--space-section);
+  position: relative;
+}
+.section--tight {
+  padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+}
+.reading {
+  max-width: var(--reading-max);
+}
+.stack > * + * {
+  margin-top: var(--space-4);
+}
+.lead {
+  font-size: var(--text-lead);
+  line-height: var(--text-lead--line-height);
+}
+.small {
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
+}
+.section-head {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: clamp(2rem, 1rem + 4vw, 4rem);
+}
+.section-head > p {
+  max-width: 40rem;
+  color: var(--fg-muted);
+}
+
+/* 12-column feel: copy ~7 columns, illustration ~5 */
+.split {
+  display: grid;
+  gap: var(--space-8);
+  align-items: center;
+}
+@media (min-width: 64rem) {
+  .split {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: var(--space-10);
+  }
+}
+
+/* Horizon: decorative gradient band between night and dawn. Carries no text. */
+.horizon {
+  --h-from: var(--color-night-800);
+  --h-to: var(--color-dawn-50);
+  position: relative;
+  height: clamp(6rem, 4rem + 8vw, 10rem);
+  background: linear-gradient(
+    to bottom,
+    var(--h-from) 0%,
+    var(--color-horizon-2) 38%,
+    var(--color-horizon-3) 66%,
+    var(--color-dawn-200) 88%,
+    var(--h-to) 100%
+  );
+  overflow: hidden;
+}
+.horizon--thin {
+  height: clamp(4rem, 3rem + 3vw, 6rem);
+}
+.horizon--from-950 {
+  --h-from: var(--color-night-950);
+}
+.horizon svg {
+  position: absolute;
+  inset-inline: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 55%;
+}
+
+/* Footer ridge: dawn turns back into night. */
+.ridge {
+  height: clamp(2.5rem, 1.5rem + 4vw, 5rem);
+  background: var(--ridge-bg, var(--color-dawn-200));
+  position: relative;
+}
+.ridge svg {
+  position: absolute;
+  inset: auto 0 -1px 0;
+  width: 100%;
+  height: 100%;
+}

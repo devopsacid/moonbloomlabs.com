@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import NotFoundArt from '../components/art/NotFoundArt.astro';
+import { getDictionary } from '../i18n';
+import { ACTIVE_LOCALES } from '../i18n/active';
+import { pagePath, type Locale } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const d = getDictionary(locale);
+const n = d.not_found;
+const others = ACTIVE_LOCALES.filter((l) => l !== locale);
+---
+
+<Base
+  locale={locale}
+  pageRef={{ kind: 'notFound' }}
+  title={n.seo.title}
+  description={n.seo.description}
+  ogTitle={n.og.title}
+  ogDescription={n.og.description}
+  noindex
+  ridge="none"
+>
+  <section class="notfound surface-night">
+    <div class="container intro__grid intro__grid--art">
+      <div>
+        <p class="code small">{n.code_label}</p>
+        <h1>{n.h1}</h1>
+        <p class="lead" style="margin-top: var(--space-5)">
+          {n.body}
+        </p>
+        <div class="btn-row" style="margin-top: var(--space-6)">
+          <a class="btn" href={pagePath(locale, 'home')}>
+            {n.links.home}
+          </a>
+          <a class="btn btn--secondary" href={pagePath(locale, 'services')}>
+            {n.links.services}
+          </a>
+          <a href={`${pagePath(locale, 'contact')}#form`}>{n.links.contact}</a>
+        </div>
+      </div>
+      <NotFoundArt />
+    </div>
+    <div class="container">
+      <div class="multi-404">
+        {others.map((l) => {
+          const o = getDictionary(l).not_found;
+          return (
+            <div lang={l}>
+              <h2>{o.h1}</h2>
+              <p>{o.code_label}</p>
+              <a href={pagePath(l, 'home')} hreflang={l}>
+                {o.links.home}
+              </a>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</Base>

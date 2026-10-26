@@ -1,0 +1,86 @@
+---
+import { SITE_URL, SITE_NAME } from '../../config/site';
+import { alternatesFor, ogImagePath } from '../../i18n';
+import { LOCALE_META, refPath, type Locale, type PageRef } from '../../i18n/routes';
+import { ACTIVE_LOCALES } from '../../i18n/active';
+import newsreaderUrl from '../../assets/fonts/newsreader-latin-wght-normal.woff2?url';
+import newsreaderExtUrl from '../../assets/fonts/newsreader-latin-ext-wght-normal.woff2?url';
+import atkinsonExtUrl from '../../assets/fonts/atkinson-hyperlegible-next-latin-ext-wght-normal.woff2?url';
+import atkinsonUrl from '../../assets/fonts/atkinson-hyperlegible-next-latin-wght-normal.woff2?url';
+
+interface Props {
+  locale: Locale;
+  pageRef: PageRef;
+  title: string;
+  description: string;
+  ogTitle: string;
+  ogDescription: string;
+  noindex?: boolean;
+  jsonld?: Record<string, unknown>[];
+}
+const {
+  locale,
+  pageRef,
+  title,
+  description,
+  ogTitle,
+  ogDescription,
+  noindex,
+  jsonld = [],
+} = Astro.props;
+const canonical = `${SITE_URL}${refPath(locale, pageRef)}`;
+const alternates = pageRef.kind === 'notFound' || noindex ? [] : alternatesFor(pageRef);
+// Czech and Slovak headings use latin-ext glyphs above the fold.
+const needsExt = locale === 'cs' || locale === 'sk';
+const og = `${SITE_URL}${ogImagePath(locale, pageRef)}`;
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+{noindex ? (
+  <meta name="robots" content="noindex, follow" />
+) : (
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+)}
+{pageRef.kind !== 'notFound' && <link rel="canonical" href={canonical} />}
+{alternates.map((a) => (
+  <link rel="alternate" hreflang={a.locale} href={`${SITE_URL}${a.path}`} />
+))}
+{alternates.length > 0 && (
+  <link rel="alternate" hreflang="x-default" href={`${SITE_URL}${alternates[0]?.path ?? '/'}`} />
+)}
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:title" content={ogTitle} />
+<meta property="og:description" content={ogDescription} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={og} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={ogTitle} />
+<meta property="og:locale" content={LOCALE_META[locale].ogLocale} />
+{ACTIVE_LOCALES.filter((l) => l !== locale).map((l) => (
+  <meta property="og:locale:alternate" content={LOCALE_META[l].ogLocale} />
+))}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={ogTitle} />
+<meta name="twitter:description" content={ogDescription} />
+<meta name="twitter:image" content={og} />
+<meta name="theme-color" content="#0F1433" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="preload" href={newsreaderUrl} as="font" type="font/woff2" crossorigin />
+<link rel="preload" href={atkinsonUrl} as="font" type="font/woff2" crossorigin />
+{needsExt && (
+  <>
+    <link rel="preload" href={newsreaderExtUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={atkinsonExtUrl} as="font" type="font/woff2" crossorigin />
+  </>
+)}
+{jsonld.map((j) => (
+  <script type="application/ld+json" set:html={JSON.stringify(j)} />
+))}

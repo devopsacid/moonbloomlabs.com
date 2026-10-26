@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+import Head from '../components/seo/Head.astro';
+import Header from '../components/nav/Header.astro';
+import Footer from '../components/nav/Footer.astro';
+import { getDictionary } from '../i18n';
+import { organization } from '../lib/schema-org';
+import { CF_ANALYTICS_TOKEN } from '../config/site';
+import type { Locale, PageRef } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+  pageRef: PageRef;
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  noindex?: boolean;
+  jsonld?: Record<string, unknown>[];
+  showCta?: boolean;
+  ridge?: 'dawn-50' | 'dawn-200' | 'none';
+}
+const {
+  locale,
+  pageRef,
+  title,
+  description,
+  ogTitle = title,
+  ogDescription = description,
+  noindex = false,
+  jsonld = [],
+  showCta = true,
+  ridge = 'dawn-200',
+} = Astro.props;
+const d = getDictionary(locale);
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <Head
+      locale={locale}
+      pageRef={pageRef}
+      title={title}
+      description={description}
+      ogTitle={ogTitle}
+      ogDescription={ogDescription}
+      noindex={noindex}
+      jsonld={[organization(d), ...jsonld]}
+    />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">
+      {d.common.skip_link}
+    </a>
+    <Header locale={locale} pageRef={pageRef} showCta={showCta} />
+    <main id="content" tabindex="-1">
+      <slot />
+    </main>
+    <Footer locale={locale} pageRef={pageRef} ridge={ridge} />
+    <script src="../scripts/site.ts"></script>
+    <slot name="scripts" />
+    {CF_ANALYTICS_TOKEN && (
+      <script
+        is:inline
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={JSON.stringify({ token: CF_ANALYTICS_TOKEN })}
+      />
+    )}
+  </body>
+</html>

@@ -1,0 +1,187 @@
+.contact-grid {
+  display: grid;
+  gap: var(--space-9);
+}
+@media (min-width: 64rem) {
+  .contact-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    column-gap: var(--space-11);
+    align-items: start;
+  }
+}
+.form {
+  display: grid;
+  gap: var(--space-6);
+  max-width: 40rem;
+  scroll-margin-top: var(--space-6);
+}
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+.field label,
+.field legend {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.4;
+  padding: 0;
+}
+.field .hint {
+  color: var(--color-dusk-600);
+  font-size: var(--text-small);
+}
+.field input[type='text'],
+.field input[type='email'],
+.field textarea {
+  width: 100%;
+  font: inherit;
+  font-size: 1.0625rem;
+  color: var(--color-night-950);
+  background: var(--color-white);
+  border: 1.5px solid var(--color-line-500);
+  border-radius: var(--radius-xs);
+  padding: 0.7rem 0.85rem;
+  min-height: 3rem;
+}
+.field textarea {
+  min-height: 11rem;
+  resize: vertical;
+}
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--color-dusk-600);
+  opacity: 0.85;
+}
+.field input:focus-visible,
+.field textarea:focus-visible {
+  outline: 2px solid var(--color-bloom-700);
+  outline-offset: 2px;
+  border-color: var(--color-bloom-700);
+}
+.field input[aria-invalid='true'],
+.field textarea[aria-invalid='true'] {
+  border: 2px solid var(--color-error-700);
+}
+.field .error {
+  display: none;
+  align-items: flex-start;
+  gap: var(--space-2);
+  color: var(--color-error-700);
+  font-size: var(--text-small);
+  font-weight: 600;
+}
+.field .error:not(:empty) {
+  display: flex;
+}
+.field .error::before {
+  content: '';
+  flex: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.1em;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3.5L22 20H2zM12 10v5M12 17.5v.5'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3.5L22 20H2zM12 10v5M12 17.5v.5'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+}
+.field .error svg {
+  flex: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.15em;
+}
+fieldset.field {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.radios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-5);
+}
+.radios label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.75rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+.radios input {
+  width: 1.25rem;
+  height: 1.25rem;
+  accent-color: var(--color-night-950);
+}
+.hp {
+  position: absolute;
+  inset-inline-start: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.status {
+  border-radius: var(--radius-tile);
+  padding: var(--space-5);
+  border: 2px solid var(--color-error-700);
+  background: var(--color-white);
+  color: var(--color-night-950);
+}
+.status:empty,
+.status[hidden] {
+  display: none;
+}
+.status h2,
+.status h3 {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-error-700);
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+}
+.status h2:focus,
+.status h3:focus {
+  outline: none;
+}
+.status ul {
+  margin: var(--space-3) 0 0;
+  padding-inline-start: 1.25rem;
+}
+.status a {
+  color: var(--color-bloom-700);
+}
+.status--ok {
+  border-color: var(--color-success-700);
+}
+.status--ok h2,
+.status--ok h3 {
+  color: var(--color-success-700);
+}
+.status--info {
+  border-color: var(--color-line-500);
+}
+.form-foot {
+  display: grid;
+  gap: var(--space-4);
+}
+.aside h2 {
+  font-size: var(--text-h3);
+  font-weight: 500;
+  margin-bottom: var(--space-3);
+}
+.aside > * + * {
+  margin-top: var(--space-6);
+}
+.aside ol {
+  list-style: decimal;
+  padding-inline-start: 1.25rem;
+  display: grid;
+  gap: var(--space-2);
+}
+.turnstile-slot {
+  min-height: 65px;
+}

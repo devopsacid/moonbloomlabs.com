@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import Horizon from '../components/art/Horizon.astro';
+import Icon from '../components/art/Icon.astro';
+import Moon from '../components/art/Moon.astro';
+import { getDictionary } from '../i18n';
+import { webPage } from '../lib/schema-org';
+import { SITE_URL } from '../config/site';
+import { pagePath, servicePath, SERVICE_KEYS, type Locale } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const d = getDictionary(locale);
+const s = d.services_index;
+const blurbs = d.home.services.cards;
+const url = `${SITE_URL}${pagePath(locale, 'services')}`;
+---
+
+<Base
+  locale={locale}
+  pageRef={{ kind: 'page', key: 'services' }}
+  title={s.seo.title}
+  description={s.seo.description}
+  ogTitle={s.og.title}
+  ogDescription={s.og.description}
+  jsonld={[webPage('WebPage', s.h1, url, locale)]}
+>
+  <section class="intro surface-night">
+    <Moon class="intro__moon" />
+    <div class="container">
+      <h1>{s.h1}</h1>
+      <p class="lead">{s.intro}</p>
+    </div>
+  </section>
+  <Horizon from="950" thin />
+  <section
+    class="section surface-dawn"
+    aria-labelledby="list-title"
+    style="padding-top: var(--space-7)"
+  >
+    <div class="container">
+      <h2 id="list-title" class="sr-only">
+        {s.list_title}
+      </h2>
+      <ul class="card-grid" role="list">
+        {SERVICE_KEYS.map((k) => {
+          const c = blurbs.find((b) => b.key === k);
+          return (
+            <li>
+              <article class="service-card" data-testid={`service-card-${k}`}>
+                <span class="icon-disc">
+                  <Icon name={k} class="icon" size={36} />
+                </span>
+                <h3>
+                  <a href={servicePath(locale, k)}>{c?.title}</a>
+                </h3>
+                <p>{c?.blurb}</p>
+              </article>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+  <section class="section surface-sunrise cta-band" aria-labelledby="cta-title">
+    <div class="container">
+      <h2 id="cta-title">{s.cta.title}</h2>
+      <p>{s.cta.body}</p>
+      <div class="btn-row">
+        <a class="btn" href={`${pagePath(locale, 'contact')}#form`}>
+          {s.cta.button}
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

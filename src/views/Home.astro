@@ -1,0 +1,228 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroScene from '../components/art/HeroScene.astro';
+import Horizon from '../components/art/Horizon.astro';
+import Bloom from '../components/art/Bloom.astro';
+import Icon from '../components/art/Icon.astro';
+import { getDictionary, rich } from '../i18n';
+import { faqPage, website } from '../lib/schema-org';
+import { pagePath, servicePath, type Locale, type ServiceKey } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const d = getDictionary(locale);
+const h = d.home;
+const contact = `${pagePath(locale, 'contact')}#form`;
+const stepSurface: Record<string, string> = {
+  evening: 'surface-night',
+  night: 'surface-night',
+  morning: 'surface-dawn-alt',
+  decision: 'surface-sunrise',
+};
+const glyph: Record<string, 'seed' | 'closed' | 'half' | 'open'> = {
+  evening: 'seed',
+  night: 'closed',
+  morning: 'half',
+  decision: 'open',
+};
+const stepsA = h.how.steps.slice(0, 2);
+const stepsB = h.how.steps.slice(2);
+const proofReady = !h.proof.body.includes('[TODO');
+---
+
+<Base
+  locale={locale}
+  pageRef={{ kind: 'page', key: 'home' }}
+  title={h.seo.title}
+  description={h.seo.description}
+  ogTitle={h.og.title}
+  ogDescription={h.og.description}
+  jsonld={[website(locale), faqPage(h.faq.items, locale)]}
+>
+  <section class="hero surface-night" aria-labelledby="hero-title">
+    <HeroScene />
+    <div class="container">
+      <div class="hero__content">
+        <p class="small muted">{h.hero.eyebrow}</p>
+        <h1 id="hero-title">{h.hero.title}</h1>
+        <p class="subtitle">{h.hero.subtitle}</p>
+        <p class="body">{h.hero.body}</p>
+        <div class="btn-row">
+          <a class="btn" href={contact} data-testid="hero-cta-primary">
+            {h.hero.cta_primary}
+          </a>
+          <a class="btn btn--secondary" href="#how-it-works" data-testid="hero-cta-secondary">
+            {h.hero.cta_secondary}
+          </a>
+        </div>
+        <p class="note">{h.hero.note}</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works" class="section surface-night-deep how" aria-labelledby="how-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="how-title">{h.how.title}</h2>
+        <p class="lead">{h.how.intro}</p>
+      </div>
+      <div class="how__grid" data-testid="how-steps">
+        <ol class="how__steps">
+          {stepsA.map((s) => (
+            <li class={`step ${stepSurface[s.key]}`}>
+              <Bloom state={glyph[s.key] ?? 'open'} stem={false} stroke={5} class="step-glyph" />
+              <span class="step__label">{s.label}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </li>
+          ))}
+        </ol>
+        <div class="how__bloom" data-testid="bloom">
+          <Bloom animate />
+        </div>
+        <ol class="how__steps" start={3}>
+          {stepsB.map((s) => (
+            <li class={`step ${stepSurface[s.key]}`}>
+              <Bloom state={glyph[s.key] ?? 'open'} stem={false} stroke={5} class="step-glyph" />
+              <span class="step__label">{s.label}</span>
+              <h3>{s.title}</h3>
+              <p>{s.body}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <Horizon />
+
+  <section
+    class="section surface-dawn"
+    aria-labelledby="services-title"
+    style="padding-top: var(--space-7)"
+  >
+    <div class="container">
+      <div class="section-head">
+        <h2 id="services-title">{h.services.title}</h2>
+        <p class="lead">{h.services.intro}</p>
+      </div>
+      <ul class="card-grid card-grid--3" role="list">
+        {h.services.cards.map((c) => (
+          <li>
+            <article class="service-card" data-testid={`service-card-${c.key}`}>
+              <span class="icon-disc">
+                <Icon name={c.key as ServiceKey} class="icon" size={36} />
+              </span>
+              <h3>
+                <a href={servicePath(locale, c.key as ServiceKey)}>{c.title}</a>
+              </h3>
+              <p>{c.blurb}</p>
+            </article>
+          </li>
+        ))}
+      </ul>
+      <p style="margin-top: var(--space-6)">
+        <a href={pagePath(locale, 'services')}>{h.services.all_link}</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section surface-dawn-alt" aria-labelledby="why-title">
+    <div class="container">
+      <div class="section-head">
+        <h2 id="why-title">{h.why.title}</h2>
+      </div>
+      <ul class="pillars pillars--3" role="list">
+        {h.why.pillars.map((p) => (
+          <li class="pillar">
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+            {p.key === 'senior_architect' && (
+              <a href={pagePath(locale, 'about')}>
+                {d.common.common_cta.learn_more}
+                <span class="sr-only">: {p.title}</span>
+              </a>
+            )}
+            {p.key === 'production_path' && (
+              <a href={servicePath(locale, 'devops_cloud')}>
+                {d.common.common_cta.learn_more}
+                <span class="sr-only">: {p.title}</span>
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section surface-dawn" aria-labelledby="morning-title">
+    <div class="container two-col">
+      <div class="section-head" style="align-content:start;margin-bottom:0">
+        <h2 id="morning-title">{h.morning.title}</h2>
+        <p class="lead">{h.morning.intro}</p>
+      </div>
+      <ul class="leaf-list" role="list" style="gap: var(--space-5)">
+        {h.morning.items.map((i) => (
+          <li>
+            <strong>{i.title}.</strong> {i.body}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {proofReady && (
+    <section class="section surface-dawn-alt" aria-labelledby="proof-title">
+      <div class="container">
+        <div class="reading">
+          <h2 id="proof-title">{h.proof.title}</h2>
+          <p set:html={rich(h.proof.body, locale)} />
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section surface-dawn-alt" aria-labelledby="faq-title">
+    <div class="container faq-layout">
+      <div>
+        <div class="section-head">
+          <h2 id="faq-title">{h.faq.title}</h2>
+        </div>
+        <div class="faq-aside">
+          <Bloom state="half" />
+          <p set:html={rich(d.contact.talk.line, locale)} />
+        </div>
+      </div>
+      <div class="faq">
+        {h.faq.items.map((f, i) => (
+          <details data-testid={`faq-item-${i + 1}`}>
+            <summary>
+              <span>{f.q}</span>
+              <Icon name="chevron" size={24} />
+            </summary>
+            <div class="answer">
+              <p set:html={rich(f.a, locale)} />
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section surface-sunrise cta-band" aria-labelledby="cta-title">
+    <div class="container cta-band__grid">
+      <div>
+        <h2 id="cta-title">{h.final_cta.title}</h2>
+        <p>{h.final_cta.body}</p>
+        <div class="btn-row">
+          <a class="btn" href={contact}>
+            {h.final_cta.button}
+          </a>
+        </div>
+      </div>
+      <Bloom class="cta-band__flower" />
+    </div>
+  </section>
+</Base>

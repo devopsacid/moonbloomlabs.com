@@ -1,0 +1,81 @@
+---
+import { getDictionary, rich } from '../../i18n';
+import { SERVICE_KEYS, pagePath, servicePath, type Locale, type PageRef } from '../../i18n/routes';
+import Mark from '../art/Mark.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+interface Props {
+  locale: Locale;
+  pageRef: PageRef;
+  ridge?: 'dawn-50' | 'dawn-200' | 'none';
+}
+const { locale, pageRef, ridge = 'dawn-200' } = Astro.props;
+const d = getDictionary(locale);
+const f = d.common.footer;
+const cards = d.home.services.cards;
+const cardTitle = (k: string) => cards.find((c) => c.key === k)?.title ?? k;
+---
+
+{ridge !== 'none' && (
+  <div class="ridge" style={`--ridge-bg:var(--color-${ridge})`} aria-hidden="true">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" focusable="false">
+      <path d="M0 50C200 14 420 56 700 36S1160 6 1440 40V80H0Z" fill="var(--color-night-950)" />
+    </svg>
+  </div>
+)}
+<footer class="site-footer surface-night" data-testid="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="logo" href={pagePath(locale, 'home')} aria-label={d.common.logo_alt}>
+          <Mark />
+          <span>{d.common.brand_name}</span>
+        </a>
+        <p class="tagline">{f.tagline}</p>
+        <p>{f.blurb}</p>
+        <p style="margin-top: var(--space-4)" set:html={rich(f.contact_line, locale)} />
+      </div>
+      <div>
+        <h2>{f.services_heading}</h2>
+        <ul class="footer-list">
+          {SERVICE_KEYS.map((k) => (
+            <li>
+              <a href={servicePath(locale, k)}>{cardTitle(k)}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2>{f.nav_heading}</h2>
+        <ul class="footer-list">
+          <li>
+            <a href={`${pagePath(locale, 'home')}#how-it-works`}>{d.common.nav.how_it_works}</a>
+          </li>
+          <li>
+            <a href={pagePath(locale, 'about')}>{d.common.nav.about}</a>
+          </li>
+          <li>
+            <a href={pagePath(locale, 'contact')}>{d.common.nav.contact}</a>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h2>{f.legal_heading}</h2>
+        <ul class="footer-list">
+          <li>
+            <a href={pagePath(locale, 'privacy')}>{f.privacy}</a>
+          </li>
+          <li>
+            <a href={pagePath(locale, 'imprint')}>{f.imprint}</a>
+          </li>
+        </ul>
+        <div style="margin-top: var(--space-5)">
+          <LanguageSwitcher locale={locale} pageRef={pageRef} variant="list" />
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom small">
+      <span>{f.copyright}</span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,12 @@
+dist
+.astro
+node_modules
+docs
+server
+tests
+public/api
+public/.htaccess
+package-lock.json
+src/assets
+scripts/og-fonts
+backup

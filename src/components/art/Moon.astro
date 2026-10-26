@@ -1,0 +1,21 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 120 120"
+  width="120"
+  height="120"
+  aria-hidden="true"
+  focusable="false"
+>
+  <circle cx="60" cy="60" r="54" fill="var(--color-moon-100)" opacity="0.04"></circle>
+  <path
+    d="M55.76 20.23A40 40 0 1 0 93.9 81.23A36 36 0 0 1 55.76 20.23Z"
+    fill="var(--color-moon-100)"
+  ></path>
+</svg>

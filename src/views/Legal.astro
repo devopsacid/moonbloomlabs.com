@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import { getDictionary, rich } from '../i18n';
+import { webPage } from '../lib/schema-org';
+import { SITE_URL } from '../config/site';
+import { pagePath, type Locale } from '../i18n/routes';
+
+interface Props {
+  locale: Locale;
+  kind: 'privacy' | 'imprint';
+}
+const { locale, kind } = Astro.props;
+const d = getDictionary(locale);
+const p = d.privacy;
+const im = d.imprint;
+// UI framing only; the literal [TODO: legal review] token stays greppable.
+const draftNote: Record<Locale, string> = {
+  en: 'draft pending legal review',
+  cs: 'návrh čeká na právní kontrolu',
+  sk: 'návrh čaká na právnu kontrolu',
+  de: 'Entwurf, rechtliche Prüfung ausstehend',
+  es: 'borrador pendiente de revisión jurídica',
+};
+const page = kind === 'privacy' ? p : im;
+const fields = Object.keys(im.fields)
+  .filter((k) => k.endsWith('_label'))
+  .map((k) => {
+    const base = k.slice(0, -'_label'.length);
+    const f = im.fields as Record<string, string>;
+    return { label: f[k] ?? '', value: f[`${base}_value`] ?? '' };
+  })
+  .filter((f) => f.label && f.value);
+---
+
+<Base
+  locale={locale}
+  pageRef={{ kind: 'page', key: kind }}
+  title={page.seo.title}
+  description={page.seo.description}
+  ogTitle={page.og.title}
+  ogDescription={page.og.description}
+  ridge="dawn-50"
+  jsonld={[webPage('WebPage', page.h1, `${SITE_URL}${pagePath(locale, kind)}`, locale)]}
+>
+  <section class="intro surface-night" style="padding-bottom: var(--space-8)">
+    <div class="container">
+      <h1>{page.h1}</h1>
+      <p class="notice small">
+        <span set:html={rich(page.review_flag, locale)} /> — {draftNote[locale]}
+      </p>
+      {kind === 'privacy' && (
+        <p
+          class="small muted"
+          style="margin-top: var(--space-3)"
+          set:html={rich(p.updated, locale)}
+        />
+      )}
+    </div>
+  </section>
+  <section class="section surface-dawn legal" style="padding-top: var(--space-8)">
+    <div class="container">
+      <div class="reading">
+        {kind === 'privacy' ? (
+          <>
+            <p class="lead">{p.intro}</p>
+            <nav class="toc" aria-label={p.h1} style="margin-top: var(--space-6)">
+              <ol>
+                {p.sections.map((s) => (
+                  <li>
+                    <a href={`#${s.key}`}>{s.title}</a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+            {p.sections.map((s) => (
+              <>
+                <h2 id={s.key}>{s.title}</h2>
+                <p set:html={rich(s.body, locale)} />
+              </>
+            ))}
+          </>
+        ) : (
+          <>
+            <dl>
+              {fields.map((f) => (
+                <>
+                  <dt>{f.label}</dt>
+                  <dd set:html={rich(f.value, locale)} />
+                </>
+              ))}
+            </dl>
+            <p style="margin-top: var(--space-6)" set:html={rich(im.trade_name_note, locale)} />
+          </>
+        )}
+      </div>
+    </div>
+  </section>
+</Base>

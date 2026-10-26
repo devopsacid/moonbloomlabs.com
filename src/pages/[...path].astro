@@ -1,0 +1,33 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Home from '../views/Home.astro';
+import ServicesIndex from '../views/ServicesIndex.astro';
+import ServiceDetail from '../views/ServiceDetail.astro';
+import About from '../views/About.astro';
+import Contact from '../views/Contact.astro';
+import Thanks from '../views/Thanks.astro';
+import Legal from '../views/Legal.astro';
+import { allPages, type Locale, type PageRef } from '../i18n/routes';
+import { ACTIVE_LOCALES } from '../i18n/active';
+
+export const getStaticPaths = (() =>
+  allPages(ACTIVE_LOCALES).map(({ locale, ref, path }) => ({
+    params: { path: path === '/' ? undefined : path.replace(/^\/|\/$/g, '') },
+    props: { locale, ref },
+  }))) satisfies GetStaticPaths;
+
+interface Props {
+  locale: Locale;
+  ref: PageRef;
+}
+const { locale, ref } = Astro.props;
+---
+
+{ref.kind === 'page' && ref.key === 'home' && <Home locale={locale} />}
+{ref.kind === 'page' && ref.key === 'services' && <ServicesIndex locale={locale} />}
+{ref.kind === 'page' && ref.key === 'about' && <About locale={locale} />}
+{ref.kind === 'page' && ref.key === 'contact' && <Contact locale={locale} />}
+{ref.kind === 'page' && ref.key === 'thanks' && <Thanks locale={locale} />}
+{ref.kind === 'page' && ref.key === 'privacy' && <Legal locale={locale} kind="privacy" />}
+{ref.kind === 'page' && ref.key === 'imprint' && <Legal locale={locale} kind="imprint" />}
+{ref.kind === 'service' && <ServiceDetail locale={locale} serviceKey={ref.key} />}
