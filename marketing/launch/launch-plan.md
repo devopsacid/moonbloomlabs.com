@@ -69,7 +69,7 @@ Not at launch: paid ads (revisit after the first case study), cold mass mailing 
 - Week 2: two service spotlights; founder post on "what fits into one night".
 - Week 3: two service spotlights; post on "a human decides, agents build" (principles).
 - Week 4: last service spotlights; recap post "What bloomed in the first month" (only real, approved facts); plan the first case study.
-- Full schedule: [content-calendar.csv](content-calendar.csv).
+- Full schedule: [content-calendar.csv](content-calendar.csv). LinkedIn day-by-day plan, posts and assets: [../linkedin/README.md](../linkedin/README.md).
 
 ## 5. Measurement
 

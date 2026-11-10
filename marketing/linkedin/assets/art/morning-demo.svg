@@ -1,0 +1,12 @@
+<!-- Moonbloom Labs LinkedIn art: "What you get in the morning" motif. Flat token colours, no shadows, outlines up to 2 px at 1x. Decorative. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" width="420" height="420">
+  <rect x="24" y="150" width="372" height="270" rx="18" fill="#0F1433"/>
+  <path d="M342 176A16 16 0 1 0 358 200A13 13 0 0 1 342 176Z" fill="#EEF0FA"/>
+  <circle cx="300" cy="196" r="1.8" fill="#B9C0E4" opacity="0.8"/>
+  <circle cx="80" cy="200" r="1.6" fill="#B9C0E4" opacity="0.6"/>
+  <circle cx="210" cy="268" r="46" fill="#F5B98A"/>
+  <path d="M196 244v48l40-24z" fill="#0F1433"/>
+  <rect x="60" y="372" width="300" height="6" rx="3" fill="#7A84C0"/>
+  <rect x="60" y="372" width="128" height="6" rx="3" fill="#F5B98A"/>
+  <circle cx="188" cy="375" r="11" fill="#F5B98A"/>
+</svg>

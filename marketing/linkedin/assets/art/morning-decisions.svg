@@ -1,0 +1,14 @@
+<!-- Moonbloom Labs LinkedIn art: "What you get in the morning" motif. Flat token colours, no shadows, outlines up to 2 px at 1x. Decorative. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" width="420" height="420">
+  <path d="M210 420C210 360 206 310 210 270" fill="none" stroke="#5F8A72" stroke-width="5" stroke-linecap="round"/>
+  <path d="M210 272C200 220 160 196 116 178" fill="none" stroke="#5F8A72" stroke-width="5" stroke-linecap="round"/>
+  <path d="M210 272C220 220 260 196 304 178" fill="none" stroke="#5F8A72" stroke-width="5" stroke-linecap="round"/>
+  <path d="M208 360C184 360 166 348 160 330 184 330 202 342 208 360Z" fill="#5F8A72"/>
+  <path d="M212 392C234 392 252 382 258 364 236 362 218 374 212 392Z" fill="#5F8A72"/>
+  <path d="M116 182C96 154 98 108 116 82C134 108 136 154 116 182Z" fill="#FBE9EF" stroke="#8C2E55" stroke-width="2"/>
+  <path d="M116 182C96 154 98 108 116 82C134 108 136 154 116 182Z" fill="#F2BFD0" transform="rotate(-20 116 182)" opacity="0.9"/>
+  <path d="M116 182C96 154 98 108 116 82C134 108 136 154 116 182Z" fill="#F2BFD0" transform="rotate(20 116 182)" opacity="0.9"/>
+  <path d="M304 182C284 154 286 108 304 82C322 108 324 154 304 182Z" fill="#F5B98A"/>
+  <path d="M304 182C284 154 286 108 304 82C322 108 324 154 304 182Z" fill="#F9CFAB" transform="rotate(-20 304 182)" opacity="0.95"/>
+  <path d="M304 182C284 154 286 108 304 82C322 108 324 154 304 182Z" fill="#F9CFAB" transform="rotate(20 304 182)" opacity="0.95"/>
+</svg>

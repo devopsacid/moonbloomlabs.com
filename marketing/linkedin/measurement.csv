@@ -1,0 +1,23 @@
+date,day,post_id,account,language,format,impressions,members_reached,reactions,comments,reposts,link_clicks,profile_or_page_visits,new_followers,dms_started,ideas_submitted,calls_booked,notes
+,baseline,,MM,,,,,,,,,,,,,,"connections/followers before L-14"
+,baseline,,CP,,,,,,,,,,,,,,"page followers before L-14"
+,L-14,P01,MM,EN,text,,,,,,,,,,,,
+,L-10,P02,MM,EN,poll,,,,,,,,,,,,"votes:"
+,L-7,P03,MM,EN,text,,,,,,,,,,,,
+,L-5,P04,MM,EN,text,,,,,,,,,,,,
+,L-4,P05,MM,EN,video,,,,,,,,,,,,"views / avg watch time:"
+,L,P06,CP,EN,image,,,,,,,,,,,,
+,L,P06,CP,SK,image,,,,,,,,,,,,
+,L,P07,MM,EN,image,,,,,,,,,,,,
+,L,P07,MM,SK,image,,,,,,,,,,,,
+,L+2,P08,CP,EN,document,,,,,,,,,,,,"pages viewed:"
+,L+4,P09,MM,EN,text,,,,,,,,,,,,
+,L+7,P10,CP,EN,document,,,,,,,,,,,,
+,L+9,P11,MM,EN,text,,,,,,,,,,,,
+,L+11,P12,CP,EN,document,,,,,,,,,,,,
+,L+14,P13,MM,EN,image,,,,,,,,,,,,
+,L+16,P14,CP,EN,image,,,,,,,,,,,,"RAG & AI search"
+,L+18,P15,MM,EN,article,,,,,,,,,,,,
+,L+21,P16,MM,EN,image,,,,,,,,,,,,
+,L+27,P17,MM,EN,text,,,,,,,,,,,,
+,L+30,P18,MM,EN,text,,,,,,,,,,,,

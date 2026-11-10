@@ -65,6 +65,10 @@ To make a new post, copy the closest HTML source in `post-templates/`, change th
 | Outreach emails: warm intro, referral, considered cold note, follow-up, intake recap, morning delivery | `outreach-emails.en.md`, `outreach-emails.sk.md`           |
 | FAQ and objection handling, intake questions                                                           | `faq-objections.md`                                        |
 
+### LinkedIn launch (`linkedin/`)
+
+A dedicated bundle for the LinkedIn launch: company page and founder profile copy, a day-by-day calendar (L-14 to L+30), 18 posts with first comments and alt text, a video script, a long-form article, an engagement kit, a measurement tracker, and new assets (three document carousels as PDF, a launch square, a founder launch portrait, an article cover, a poll image and a page-header preview). Start with [linkedin/README.md](linkedin/README.md).
+
 ## Editing and re-rendering
 
 Every PNG and PDF is generated from the SVG/HTML sources next to it. Edit the source, then run this from the repo root:

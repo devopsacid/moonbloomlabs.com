@@ -6,7 +6,7 @@
  *   node marketing/tools/render.mjs            # everything
  *   node marketing/tools/render.mjs logos      # brand/logo/*.svg + *.png and social/avatars/*.png
  *   node marketing/tools/render.mjs boards     # every HTML artboard -> PNG (brand, social, posts)
- *   node marketing/tools/render.mjs pdf        # sales one-pagers and pitch decks -> PDF
+ *   node marketing/tools/render.mjs pdf        # sales one-pagers, pitch decks, LinkedIn carousels -> PDF
  *   node marketing/tools/render.mjs boards social/banners/banners.en.html   # one source file only
  *
  * Dependencies (nothing is added to the repo package.json):
@@ -25,7 +25,8 @@
  *     site's variable font). The wordmark text is converted to outlines, so the SVGs need no font.
  *   - Every other PNG comes from an HTML artboard file: each element with data-out="file.png" is
  *     screenshotted at its CSS size (device scale 1) and saved next to the HTML file, then optimised.
- *   - PDFs come from the sales HTML files with their own @page size (A4, 16:9).
+ *   - PDFs come from the sales HTML files with their own @page size (A4, 16:9) and from the LinkedIn
+ *     document carousels (linkedin/assets/carousel-*.html, 1080 x 1350 px pages, one .page per slide).
  *   - Fonts are self-hosted via marketing/brand/fonts.css -> ../../src/assets/fonts, so renders are offline.
  */
 import { createRequire } from 'node:module';
@@ -304,12 +305,20 @@ const BOARDS = [
   'social/post-templates/service-spotlight.en.html',
   'social/post-templates/launch.en.html',
   'social/post-templates/launch.sk.html',
+  'linkedin/assets/linkedin-visuals.en.html',
+  'linkedin/assets/linkedin-visuals.sk.html',
 ];
 const PDFS = [
   'sales/one-pager.en.html',
   'sales/one-pager.sk.html',
   'sales/pitch-deck.en.html',
   'sales/pitch-deck.sk.html',
+  'linkedin/assets/carousel-how-it-works.en.html',
+  'linkedin/assets/carousel-how-it-works.sk.html',
+  'linkedin/assets/carousel-what-you-get.en.html',
+  'linkedin/assets/carousel-what-you-get.sk.html',
+  'linkedin/assets/carousel-services.en.html',
+  'linkedin/assets/carousel-services.sk.html',
 ];
 
 async function openPage(b, rel, viewport = { width: 2700, height: 1600 }) {
@@ -354,6 +363,23 @@ async function boards(only) {
           if (n.scrollWidth > n.clientWidth + 1 && getComputedStyle(n).overflow !== 'visible')
             bad.push('clipped: ' + n.textContent.trim().slice(0, 40));
         }
+        // Footer guard: no text may run into the board's .foot (logo + URL row).
+        const foot = root.querySelector('.foot');
+        if (foot) {
+          const f = foot.getBoundingClientRect();
+          for (const n of root.querySelectorAll('h1,h2,h3,p,li,span,a,figcaption,dt,dd')) {
+            if (foot.contains(n) || n.contains(foot)) continue;
+            const q = n.getBoundingClientRect();
+            if (
+              q.width &&
+              q.left < f.right &&
+              q.right > f.left &&
+              q.top < f.bottom &&
+              q.bottom > f.top
+            )
+              bad.push('overlaps footer: ' + n.textContent.trim().slice(0, 40));
+          }
+        }
         return bad;
       });
       if (over.length) problems.push(`${out}: text outside artboard: ${over.join(' | ')}`);
@@ -372,6 +398,30 @@ async function boards(only) {
   await b.close();
 }
 
+// Chromium rounds a CSS px page size up to whole device units (1080 x 1350 px prints as
+// 810 x 1013.04 pt), leaving a hairline of blank paper along the bottom of every page. For sources
+// that opt in with <body data-exact-page>, trim each MediaBox from the bottom to the exact CSS size.
+// The replacement is padded to the same byte length, so the xref offsets stay valid.
+function exactMediaBox(file, wPt, hPt) {
+  const buf = readFileSync(file, 'latin1');
+  let bad = '';
+  const out = buf.replace(/\/MediaBox \[0 0 ([\d.]+) ([\d.]+)\]/g, (m, w, h) => {
+    const dy = +h - hPt;
+    if (Math.abs(+w - wPt) > 0.01 || dy < -0.01 || dy > 1) {
+      bad = `page box ${w} x ${h} pt, expected ${wPt} x ${hPt} pt`;
+      return m;
+    }
+    const box = `/MediaBox [0 ${+dy.toFixed(3)} ${w} ${+(+h).toFixed(3)}]`;
+    if (box.length > m.length) {
+      bad = `cannot trim ${m}`;
+      return m;
+    }
+    return box.padEnd(m.length, ' ');
+  });
+  writeFileSync(file, out, 'latin1');
+  return bad;
+}
+
 async function pdfs(only) {
   console.log('pdf');
   const b = await browser();
@@ -388,13 +438,41 @@ async function pdfs(only) {
           if (q.width && (q.right > r.right + 0.5 || q.bottom > r.bottom + 0.5))
             bad.push(`page ${i + 1}: ${n.textContent.trim().slice(0, 40)}`);
         }
+        const foot = pg.querySelector('.foot');
+        if (foot) {
+          const f = foot.getBoundingClientRect();
+          for (const n of pg.querySelectorAll('h1,h2,h3,p,li,span,a,dd,dt')) {
+            if (foot.contains(n) || n.contains(foot)) continue;
+            const q = n.getBoundingClientRect();
+            if (
+              q.width &&
+              q.left < f.right &&
+              q.right > f.left &&
+              q.top < f.bottom &&
+              q.bottom > f.top
+            )
+              bad.push(`page ${i + 1}: overlaps footer: ${n.textContent.trim().slice(0, 40)}`);
+          }
+        }
       });
       return bad;
     });
     if (over.length) problems.push(`text outside page: ${over.join(' | ')}`);
     const out = join(MKT, rel.replace(/\.html$/, '.pdf'));
     await page.pdf({ path: out, preferCSSPageSize: true, printBackground: true });
+    if (await page.evaluate(() => document.body.hasAttribute('data-exact-page'))) {
+      const size = await page.evaluate(() => {
+        const r = document.querySelector('.page').getBoundingClientRect();
+        return { w: r.width, h: r.height };
+      });
+      const fix = exactMediaBox(out, size.w * 0.75, size.h * 0.75);
+      if (fix) problems.push(fix);
+    }
     const pages = (readFileSync(out, 'latin1').match(/\/Type\s*\/Page[^s]/g) || []).length;
+    // Page guard: one printed page per .page element (a mismatch means a slide spilled over).
+    const expected = await page.evaluate(() => document.querySelectorAll('.page').length);
+    if (expected && pages !== expected)
+      problems.push(`${pages} printed page(s) for ${expected} .page element(s)`);
     console.log(
       `  ${relative(MKT, out)}  ${pages} page(s)  ${(statSync(out).size / 1024).toFixed(0)} kB`,
     );
