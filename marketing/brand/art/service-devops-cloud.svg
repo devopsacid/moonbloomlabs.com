@@ -1,0 +1,47 @@
+<!-- Moonbloom Labs brand art. Source: src/components/art/ServiceArt.astro. Decorative; colours are design.md tokens. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" width="480" height="300" fill="none" stroke="#EEF0FA" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="60" cy="40" r="1.6" fill="#B9C0E4" stroke="none" opacity="0.7"/><circle cx="150" cy="70" r="1.2" fill="#B9C0E4" stroke="none" opacity="0.7"/><circle cx="250" cy="30" r="1.8" fill="#B9C0E4" stroke="none" opacity="0.7"/><circle cx="330" cy="90" r="1.2" fill="#B9C0E4" stroke="none" opacity="0.7"/><circle cx="430" cy="50" r="1.6" fill="#B9C0E4" stroke="none" opacity="0.7"/><circle cx="20" cy="120" r="1.2" fill="#B9C0E4" stroke="none" opacity="0.7"/>
+  <path
+    d="M395 34a22 22 0 1 0 22 36 18 18 0 0 1-22-36Z"
+    fill="#EEF0FA"
+    stroke="none"
+    opacity="0.9"
+  />
+  <path
+    d="M0 262C80 246 150 272 240 258S400 244 480 260V300H0Z"
+    fill="#171D47"
+    stroke="none"
+  />
+  <path
+    d="M0 262C80 246 150 272 240 258S400 244 480 260"
+    stroke="#7A84C0"
+    opacity="0.6"
+  />
+    <g>
+      <path
+        d="M130 262V86M250 262V86M370 262V86M100 130h300M100 190h300M100 236h300"
+        opacity="0.8"
+      />
+      <path
+        d="M130 262c0-50 120-50 120-100s-110-50-110-110"
+        stroke="#5F8A72"
+        stroke-width="3.2"
+      />
+      <path
+        d="M200 206c26 0 44-10 50-34-26 0-44 12-50 34ZM160 128c20 0 34-8 40-26-20 0-34 10-40 26Z"
+        fill="#5F8A72"
+        stroke="none"
+      />
+      <path
+        d="M140 52c-10-16-4-34 12-40 8 16 2 34-12 40Z"
+        fill="#F2BFD0"
+        stroke="none"
+      />
+      <path
+        d="M300 60c0-14 10-24 24-24 8 0 14 4 18 10 12-2 24 6 24 18 0 10-8 18-18 18h-42c-8 0-14-6-14-14s6-14 14-14Z"
+        stroke="#B9C0E4"
+        opacity="0.7"
+        transform="translate(40 -6)"
+      />
+    </g>
+  </svg>

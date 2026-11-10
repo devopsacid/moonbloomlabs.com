@@ -1,0 +1,2 @@
+<!-- Moonbloom Labs brand art. Source: src/components/art/Icon.astro. Decorative; colours are design.md tokens. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#F5B98A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20.500L13 10.500M10.500 14.500l3 3M12 13l3 3M13.500 11.500l3 3M13 14.500c0-4 3-6.500 6-7.500M19 7c.5-2 2-3 3-3.200 0 1.500-.8 3-3 3.200z"/></svg>

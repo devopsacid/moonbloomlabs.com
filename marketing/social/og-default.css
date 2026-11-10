@@ -1,0 +1,66 @@
+/* Default link-preview image 1200 x 630 (same scene as the site's generated OG images):
+   night sky with text, then a decorative horizon band (no text) into dawn. */
+.og {
+  width: 1200px;
+  height: 630px;
+}
+.og .logo {
+  position: absolute;
+  left: 80px;
+  top: 64px;
+  height: 42px;
+}
+.og .copy {
+  position: absolute;
+  left: 80px;
+  top: 168px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.og .tagline {
+  font-size: 92px;
+  white-space: nowrap;
+}
+.og .sub {
+  font-size: 30px;
+  line-height: 1.4;
+}
+.og .band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 170px;
+  background: linear-gradient(
+    180deg,
+    #0f1433 0%,
+    #5b4a86 34%,
+    #c98ba0 64%,
+    #f6d5c2 88%,
+    #fdf3ec 100%
+  );
+}
+.og .wave {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 80px;
+}
+.og .moon {
+  position: absolute;
+  right: 110px;
+  top: 70px;
+  width: 112px;
+}
+.og .flower {
+  position: absolute;
+  right: 170px;
+  bottom: 28px;
+  width: 210px;
+}
+.og .stars {
+  position: absolute;
+  inset: 0;
+}

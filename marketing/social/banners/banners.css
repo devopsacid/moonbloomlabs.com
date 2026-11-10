@@ -1,0 +1,236 @@
+/* Profile banners. Night sky, crescent, a bud on the horizon, tagline.
+   Text stays on solid night-950 and out of the avatar overlap (bottom-left on LinkedIn and X)
+   and inside the YouTube 1546 x 423 safe area. Add class "guides" to <body> to see the YouTube safe area. */
+.banner {
+  font-family: 'Atkinson Hyperlegible Next', 'Segoe UI', system-ui, sans-serif;
+}
+.banner .hills {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+.banner .moon,
+.banner .bud,
+.banner .stars,
+.banner .flower {
+  position: absolute;
+}
+.banner .copy {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.banner .tagline {
+  font-family: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+  font-weight: 380;
+  letter-spacing: -0.012em;
+  line-height: 1.04;
+  white-space: nowrap;
+}
+.banner .sub {
+  color: var(--mb-mist-300);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.banner .url {
+  color: var(--mb-apricot-300);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* LinkedIn company page 1128 x 191: logo overlaps bottom-left, mobile crops the sides. */
+.li-company {
+  width: 1128px;
+  height: 191px;
+}
+.li-company .copy {
+  left: 300px;
+  top: 44px;
+  gap: 10px;
+}
+.li-company .tagline {
+  font-size: 54px;
+}
+.li-company .sub {
+  font-size: 20px;
+}
+.li-company .hills {
+  height: 58px;
+}
+.li-company .moon {
+  width: 52px;
+  right: 120px;
+  top: 30px;
+}
+.li-company .bud {
+  height: 50px;
+  right: 270px;
+  bottom: 24px;
+}
+
+/* LinkedIn personal 1584 x 396: profile photo covers the lower-left third. */
+.li-personal {
+  width: 1584px;
+  height: 396px;
+}
+.li-personal .copy {
+  left: 520px;
+  top: 96px;
+  gap: 18px;
+}
+.li-personal .tagline {
+  font-size: 80px;
+}
+.li-personal .sub {
+  font-size: 30px;
+}
+.li-personal .url {
+  font-size: 24px;
+  margin-top: 6px;
+}
+.li-personal .hills {
+  height: 110px;
+}
+.li-personal .moon {
+  width: 92px;
+  right: 100px;
+  top: 56px;
+}
+.li-personal .bud {
+  height: 92px;
+  right: 300px;
+  bottom: 66px;
+}
+
+/* X header 1500 x 500: avatar overlaps bottom-left; phones crop roughly 60 px top and bottom. */
+.x-header {
+  width: 1500px;
+  height: 500px;
+}
+.x-header .copy {
+  left: 380px;
+  top: 128px;
+  gap: 20px;
+}
+.x-header .tagline {
+  font-size: 84px;
+}
+.x-header .sub {
+  font-size: 32px;
+}
+.x-header .url {
+  font-size: 24px;
+  margin-top: 4px;
+}
+.x-header .hills {
+  height: 130px;
+}
+.x-header .moon {
+  width: 96px;
+  right: 96px;
+  top: 64px;
+}
+.x-header .bud {
+  height: 100px;
+  right: 280px;
+  bottom: 76px;
+}
+
+/* GitHub social preview 1280 x 640: keep 40 px clear on every edge. */
+.gh-preview {
+  width: 1280px;
+  height: 640px;
+}
+.gh-preview .logo {
+  position: absolute;
+  left: 80px;
+  top: 72px;
+  height: 46px;
+}
+.gh-preview .copy {
+  left: 80px;
+  top: 196px;
+  gap: 22px;
+}
+.gh-preview .tagline {
+  font-size: 96px;
+}
+.gh-preview .sub {
+  font-size: 32px;
+}
+.gh-preview .url {
+  font-size: 26px;
+  margin-top: 8px;
+}
+.gh-preview .hills {
+  height: 150px;
+}
+.gh-preview .moon {
+  width: 120px;
+  right: 110px;
+  top: 76px;
+}
+.gh-preview .flower {
+  width: 230px;
+  right: 150px;
+  bottom: 52px;
+}
+
+/* YouTube 2560 x 1440: everything that matters lives in the centred 1546 x 423 safe area
+   (x 507-2053, y 508-931). TV shows the full canvas, desktop a 2560 x 423 strip. */
+.yt-banner {
+  width: 2560px;
+  height: 1440px;
+}
+.yt-banner .logo {
+  position: absolute;
+  left: 567px;
+  top: 560px;
+  height: 52px;
+}
+.yt-banner .copy {
+  left: 567px;
+  top: 650px;
+  gap: 18px;
+}
+.yt-banner .tagline {
+  font-size: 112px;
+}
+.yt-banner .sub {
+  font-size: 36px;
+}
+.yt-banner .hills {
+  height: 620px;
+}
+.yt-banner .moon {
+  width: 120px;
+  left: 1860px;
+  top: 560px;
+}
+.yt-banner .bud {
+  height: 120px;
+  left: 1730px;
+  top: 768px;
+}
+
+.guides .safe {
+  position: absolute;
+  outline: 2px dashed var(--mb-apricot-300);
+}
+.safe {
+  display: none;
+}
+.guides .safe {
+  display: block;
+}
+.yt-banner .safe {
+  left: 507px;
+  top: 508px;
+  width: 1546px;
+  height: 423px;
+}

@@ -1,0 +1,34 @@
+/* Moonbloom Labs colour tokens (docs/plan/design.md section 4). Generated alongside colors.json.
+   Text only on solid token colours; approved pairs are listed in colors.json. */
+:root {
+  --mb-night-950: #0f1433; /* Base night: header, hero, footer; text colour on dawn; primary button fill on dawn */
+  --mb-night-900: #171d47; /* Raised night surface: mobile nav panel */
+  --mb-night-800: #222a5c; /* Deep-night section (How it works, The problem); primary button hover on dawn */
+  --mb-night-500: #7a84c0; /* UI borders on night (inputs if ever on night, nav panel divider) */
+  --mb-moon-100: #eef0fa; /* Primary text on night; moon illustration */
+  --mb-mist-300: #b9c0e4; /* Secondary text on night; stars */
+  --mb-apricot-300: #f5b98a; /* First light: primary button fill on night, links on night, focus ring on night */
+  --mb-apricot-200: #f9cfab; /* Primary button hover on night */
+  --mb-dawn-50: #fdf3ec; /* Main dawn surface (reading, forms) */
+  --mb-dawn-100: #fae6d8; /* Alternate dawn surface, morning step tiles */
+  --mb-dawn-200: #f6d5c2; /* Sunrise surface (final CTA) */
+  --mb-dusk-600: #4b4a6e; /* Secondary text on dawn, helper text */
+  --mb-bloom-700: #8c2e55; /* Links on dawn, focus ring on dawn, petal outline ink */
+  --mb-line-500: #7d7290; /* Input borders and dividers that carry meaning on dawn */
+  --mb-white: #ffffff; /* Input field fill */
+  --mb-error-700: #a1262b; /* Error text and error border on dawn */
+  --mb-error-300: #ff9c8f; /* Error text on night (reserved; no forms on night at launch) */
+  --mb-success-700: #2d6a4f; /* Success text and icon on dawn */
+  /* decorative only: never as or behind text */
+  --mb-petal-100: #fbe9ef;
+  --mb-petal-300: #f2bfd0;
+  --mb-leaf-500: #5f8a72;
+  --mb-horizon: linear-gradient(
+    180deg,
+    #222a5c 0%,
+    #5b4a86 30%,
+    #c98ba0 60%,
+    #f6d5c2 85%,
+    #fdf3ec 100%
+  );
+}

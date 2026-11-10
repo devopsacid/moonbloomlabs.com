@@ -1,0 +1,24 @@
+day,channel,language,format,topic,asset,copy_ref
+L-7,LinkedIn founder,EN+SK,text,Why I'm building Moonbloom (teaser),none,social-posts.en.md#founder-teaser
+L-5,LinkedIn founder,EN,text,Tonight I'm planting this idea,none,social-posts.en.md#demo-teaser
+L,LinkedIn company,EN,image,Launch announcement,social/post-templates/launch-announcement-1200x627.png,social-posts.en.md#company-launch
+L,LinkedIn founder,EN,text + link,Launch story,none,social-posts.en.md#founder-launch
+L,LinkedIn founder,SK,text + link,Launch story (SK),none,social-posts.sk.md#founder-launch
+L,Email,EN+SK,email,Launch email to network,none,launch-email.en.md / launch-email.sk.md
+L,X / Bluesky,EN,thread,Launch thread,social/post-templates/launch-announcement-1080x1080.png,social-posts.en.md#x-thread
+L,Product Hunt,EN,listing,Product Hunt launch,social/og-default.png + how-it-works-*.png,social-posts.en.md#product-hunt
+L,Press,EN+SK,press release,Launch release,press-kit,press-release.en.md / press-release.sk.md
+L+1,LinkedIn founder,EN,video,What bloomed overnight (demo result),[TODO: demo video],social-posts.en.md#demo-result
+L+3,LinkedIn company,EN,carousel,How it works (4 slides),social/post-templates/how-it-works-*.png,social-posts.en.md#carousel
+L+4,LinkedIn company,SK,carousel,Ako to funguje (4 slides),social/post-templates/how-it-works-*.sk.png,social-posts.sk.md#carousel
+L+6,LinkedIn company,EN,image,Service spotlight: RAG & AI search,social/post-templates/service-rag-ai-search.png,social-posts.en.md#services
+L+8,LinkedIn founder,EN,text,What fits into one night,none,social-posts.en.md#one-night
+L+10,LinkedIn company,EN,image,Service spotlight: Chatbots & AI assistants,social/post-templates/service-chatbots-ai-assistants.png,social-posts.en.md#services
+L+13,LinkedIn company,EN,image,Service spotlight: Knowledge management,social/post-templates/service-knowledge-management.png,social-posts.en.md#services
+L+15,LinkedIn founder,EN+SK,text,A human decides; agents build,social/post-templates/quote-card.png,social-posts.en.md#principle
+L+17,LinkedIn company,EN,image,Service spotlight: AI integration,social/post-templates/service-ai-integration.png,social-posts.en.md#services
+L+20,LinkedIn company,EN,image,Service spotlight: Gamification,social/post-templates/service-gamification.png,social-posts.en.md#services
+L+22,X / Bluesky,EN,text,What you get in the morning,none,social-posts.en.md#x-singles
+L+24,LinkedIn company,EN,image,Service spotlight: DevOps & cloud,social/post-templates/service-devops-cloud.png,social-posts.en.md#services
+L+27,LinkedIn founder,EN,text,From prototype to production,none,social-posts.en.md#production
+L+30,LinkedIn founder,EN+SK,text,First month recap (real facts only),none,[TODO: write from real results]

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Moonbloom Labs type specimen</title>
+    <link rel="stylesheet" href="board.css" />
+    <link rel="stylesheet" href="boards.css" />
+  </head>
+  <body>
+    <section class="artboard ref dawn-50" data-out="type-specimen.png">
+      <header>
+        <div>
+          <h1 class="heading">Type</h1>
+          <p class="intro lead muted">
+            A literary serif for headings, a legibility-first sans for reading. Sentence case,
+            left-aligned, nothing below 15 px.
+          </p>
+        </div>
+        <img src="logo/moonbloom-horizontal-on-dawn.svg" alt="Moonbloom Labs" />
+      </header>
+
+      <div class="families">
+        <article class="family">
+          <p class="aa serif w380">Aa</p>
+          <h2 class="fname serif w420">Newsreader</h2>
+          <p class="fmeta">
+            Display and headings. Variable, weight 200 to 800, roman and italic. SIL OFL 1.1.<br />Fallback:
+            Iowan Old Style, Georgia, serif. Italic only for time-of-day labels.
+          </p>
+          <p class="chars serif w400">
+            ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz<br />0123456789 &amp; ? ! , .
+            ; : “ ” ( )<br />á ä č ď é í ĺ ľ ň ó ô ŕ š ť ú ý ž
+          </p>
+          <p class="weights serif">
+            <span class="w380">Light 380</span><span class="w420">Regular 420</span
+            ><span class="w500">Medium 500</span
+            ><span class="it w450 fg-bloom-700">Evening, Night</span>
+          </p>
+        </article>
+        <article class="family">
+          <p class="aa sans w400">Aa</p>
+          <h2 class="fname sans w600">Atkinson Hyperlegible Next</h2>
+          <p class="fmeta">
+            Body and UI. Variable, weight 200 to 800. Braille Institute, SIL OFL 1.1.<br />Fallback:
+            Segoe UI, system-ui, Arial, sans-serif. Distinct Il1 and O0.
+          </p>
+          <p class="chars sans w400">
+            ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz<br />0123456789 Il1 O0 &amp;
+            ? ! ( )<br />á ä č ď é í ĺ ľ ň ó ô ŕ š ť ú ý ž
+          </p>
+          <p class="weights sans">
+            <span class="w400">Regular 400</span><span class="w600">Semibold 600</span>
+          </p>
+        </article>
+      </div>
+
+      <h2 class="heading">Scale</h2>
+      <p class="note">
+        Desktop end of each fluid token (design.md section 5; fluid between 320 and 1440 px). Print:
+        body 9.5 to 11 pt, never below 9 pt.
+      </p>
+      <table class="scale">
+        <tr>
+          <td class="tok"><b>text-hero</b>Newsreader 380, 112 px, lh 1.02</td>
+          <td class="s-hero">Ideas bloom overnight.</td>
+        </tr>
+        <tr>
+          <td class="tok"><b>text-display</b>Newsreader 400, 72 px, lh 1.05</td>
+          <td class="s-display">What we build overnight</td>
+        </tr>
+        <tr>
+          <td class="tok"><b>text-h2</b>Newsreader 420, 48 px, lh 1.12</td>
+          <td class="s-h2">From evening idea to morning prototype</td>
+        </tr>
+        <tr>
+          <td class="tok"><b>text-h3</b>Newsreader 500, 28 px, lh 1.2</td>
+          <td class="s-h3">Prototype, tests, demo, questions</td>
+        </tr>
+        <tr>
+          <td class="tok"><b>text-step</b>Newsreader italic 450, 17 px</td>
+          <td class="s-step">Evening</td>
+        </tr>
+        <tr>
+          <td class="tok"><b>text-lead</b>Atkinson 400, 23 px, lh 1.5</td>
+          <td class="s-lead">Plant an idea at night. Wake up to done.</td>
+        </tr>
+        <tr>
+          <td class="tok"><b>text-body</b>Atkinson 400, 18 px, lh 1.65</td>
+          <td class="s-body">
+            Tell us your idea in a short evening call; AI agents build it overnight, following a
+            plan a senior architect has reviewed. In the morning you review a working prototype, its
+            tests and a short list of decisions only you can make.
+          </td>
+        </tr>
+        <tr>
+          <td class="tok"><b>text-label</b>Atkinson 600, 16 px, lh 1.4</td>
+          <td class="s-label">Plant your idea</td>
+        </tr>
+        <tr>
+          <td class="tok"><b>text-small</b>Atkinson 400, 15 px, lh 1.55</td>
+          <td class="s-small">A human approves every release.</td>
+        </tr>
+      </table>
+
+      <h2 class="heading">Slovak specimen</h2>
+      <p class="note">
+        Owner check from design.md section 5: both families render the Latin Extended subset (č ď ľ
+        ĺ ň ŕ š ť ž ô ä).
+      </p>
+      <div class="sk-specimen">
+        <div lang="sk">
+          <p class="serif w400">Ľúbivé ťahy, ďakujeme, kôň, päť</p>
+          <p class="serif">Newsreader 400. Nápady rozkvitnú cez noc.</p>
+        </div>
+        <div lang="sk">
+          <p class="sans w400">Ľúbivé ťahy, ďakujeme, kôň, päť</p>
+          <p class="sans">Atkinson Hyperlegible Next 400. Večer zasaďte nápad. Ráno je hotovo.</p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

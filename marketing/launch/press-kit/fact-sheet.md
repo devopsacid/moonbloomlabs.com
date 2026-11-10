@@ -1,0 +1,43 @@
+# Fact sheet
+
+Status: draft for owner approval. Only confirmed facts; unknowns are `[TODO]`.
+
+## EN
+
+|                 |                                                                                                                                                                                                                                 |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name            | Moonbloom Labs                                                                                                                                                                                                                  |
+| What            | AI studio for working prototypes                                                                                                                                                                                                |
+| Tagline         | Ideas bloom overnight.                                                                                                                                                                                                          |
+| Founded         | [TODO: founding date]                                                                                                                                                                                                           |
+| Founder         | Michal Maxian, founder, AI & cloud architect                                                                                                                                                                                    |
+| Based in        | Bratislava, Slovakia [TODO: confirm]                                                                                                                                                                                            |
+| Legal entity    | [TODO: company legal name], [TODO: IČO], [TODO: registered address]                                                                                                                                                             |
+| Languages       | English, Slovak                                                                                                                                                                                                                 |
+| Area served     | [TODO: confirm area served]                                                                                                                                                                                                     |
+| How it works    | Evening: describe the idea and agree the scope. Night: AI agents build and test under a reviewed plan. Morning: working prototype, tests, short demo, open decisions. Decision: approve, refine or plan the path to production. |
+| Services        | RAG & AI search · Knowledge management · Chatbots & AI assistants · Gamification · AI integration · DevOps & cloud                                                                                                              |
+| Principles      | A human decides · Transparent · Secure by default · Honest scope                                                                                                                                                                |
+| Confidentiality | NDA available; sample or anonymised data where possible; AI services agreed up front                                                                                                                                            |
+| Code ownership  | The client owns the prototype code and documentation [TODO: confirm IP terms]                                                                                                                                                   |
+| Pricing         | [TODO: pricing]                                                                                                                                                                                                                 |
+| Website         | https://moonbloomlabs.com                                                                                                                                                                                                       |
+| Contact         | michal@maxian.sk                                                                                                                                                                                                                |
+
+## SK (draft — needs native review)
+
+|                |                                                                                                                                                                                                                                              |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Názov          | Moonbloom Labs                                                                                                                                                                                                                               |
+| Čo robí        | AI štúdio pre funkčné prototypy                                                                                                                                                                                                              |
+| Slogan         | Nápady rozkvitnú cez noc.                                                                                                                                                                                                                    |
+| Založené       | [TODO: dátum založenia]                                                                                                                                                                                                                      |
+| Zakladateľ     | Michal Maxian, zakladateľ, AI a cloudový architekt                                                                                                                                                                                           |
+| Sídlo          | Bratislava [TODO: potvrdiť]                                                                                                                                                                                                                  |
+| Spoločnosť     | [TODO: obchodné meno], [TODO: IČO], [TODO: sídlo]                                                                                                                                                                                            |
+| Jazyky         | slovenčina, angličtina                                                                                                                                                                                                                       |
+| Ako to funguje | Večer: opíšete nápad a dohodneme rozsah. Noc: AI agenti stavajú a testujú podľa skontrolovaného plánu. Ráno: funkčný prototyp, testy, krátke demo, otvorené rozhodnutia. Rozhodnutie: schváliť, doladiť alebo naplánovať cestu do produkcie. |
+| Služby         | RAG a AI vyhľadávanie · Správa znalostí · Chatboty a AI asistenti · Gamifikácia · AI integrácia · DevOps a cloud                                                                                                                             |
+| Zásady         | Rozhoduje človek · Transparentnosť · Bezpečnosť od začiatku · Úprimný rozsah                                                                                                                                                                 |
+| Web            | https://moonbloomlabs.com/sk/                                                                                                                                                                                                                |
+| Kontakt        | michal@maxian.sk                                                                                                                                                                                                                             |

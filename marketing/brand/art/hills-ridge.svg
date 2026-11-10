@@ -1,0 +1,2 @@
+<!-- Moonbloom Labs brand art. Source: src/components/art/HeroScene.astro (front ridge only). One solid night-900 fill, so text may sit on its lower part. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 56 1440 184" width="1440" height="184" preserveAspectRatio="xMidYMax slice"><path d="M0 120C160 84 300 110 460 96S760 60 940 88 1260 104 1440 78V240H0Z" fill="#171D47"/><path d="M0 120C160 84 300 110 460 96S760 60 940 88 1260 104 1440 78" fill="none" stroke="#B9C0E4" stroke-opacity="0.4" stroke-width="1.5"/></svg>

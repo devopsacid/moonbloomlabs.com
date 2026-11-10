@@ -1,0 +1,715 @@
+/* Sales one-pager (A4) and pitch deck (16:9). Print-first: each .page is one printed page.
+   Night header, decorative horizon band (no text), dawn body; tokens from docs/plan/design.md. */
+@import url('../brand/fonts.css');
+@import url('../brand/colors.css');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  margin: 0;
+  background: var(--mb-night-900);
+  font-family: 'Atkinson Hyperlegible Next', 'Segoe UI', system-ui, Arial, sans-serif;
+  color: var(--mb-night-950);
+}
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+img {
+  display: block;
+}
+a {
+  color: inherit;
+}
+.page {
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto 24px;
+  break-after: page;
+  page-break-after: always;
+}
+.page:last-child {
+  break-after: auto;
+  page-break-after: auto;
+}
+@media print {
+  body {
+    background: none;
+  }
+  .page {
+    margin: 0;
+  }
+}
+
+/* ---------- surfaces and type ---------- */
+.night-950 {
+  background: var(--mb-night-950);
+  color: var(--mb-moon-100);
+  --muted: var(--mb-mist-300);
+  --accent: var(--mb-apricot-300);
+}
+.night-900 {
+  background: var(--mb-night-900);
+  color: var(--mb-moon-100);
+  --muted: var(--mb-mist-300);
+  --accent: var(--mb-apricot-300);
+}
+.night-800 {
+  background: var(--mb-night-800);
+  color: var(--mb-moon-100);
+  --muted: var(--mb-mist-300);
+  --accent: var(--mb-apricot-300);
+}
+.dawn-50 {
+  background: var(--mb-dawn-50);
+  color: var(--mb-night-950);
+  --muted: var(--mb-dusk-600);
+  --accent: var(--mb-bloom-700);
+}
+.dawn-100 {
+  background: var(--mb-dawn-100);
+  color: var(--mb-night-950);
+  --muted: var(--mb-dusk-600);
+  --accent: var(--mb-bloom-700);
+}
+.dawn-200 {
+  background: var(--mb-dawn-200);
+  color: var(--mb-night-950);
+  --muted: var(--mb-dusk-600);
+  --accent: var(--mb-bloom-700);
+}
+.serif {
+  font-family: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+}
+.display {
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 380;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+.heading {
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 420;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+.title {
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 500;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+.step {
+  font-family: 'Newsreader', Georgia, serif;
+  font-style: italic;
+  font-weight: 450;
+  color: var(--accent);
+}
+.muted {
+  color: var(--muted);
+}
+.accent {
+  color: var(--accent);
+}
+.label {
+  font-weight: 600;
+}
+.pretty {
+  text-wrap: pretty;
+}
+.leaf {
+  border-radius: 1.75em 0.375em 1.75em 0.375em;
+}
+.tile {
+  border-radius: 1em;
+}
+.todo {
+  border: 1.5px dashed var(--mb-line-500);
+  color: var(--mb-dusk-600);
+  background: var(--mb-dawn-50);
+}
+.horizon {
+  background: linear-gradient(
+    180deg,
+    #0f1433 0%,
+    #5b4a86 34%,
+    #c98ba0 64%,
+    #f6d5c2 88%,
+    #fdf3ec 100%
+  );
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.night-950 .pill,
+.night-800 .pill {
+  background: var(--mb-apricot-300);
+  color: var(--mb-night-950);
+}
+.dawn-50 .pill,
+.dawn-100 .pill,
+.dawn-200 .pill {
+  background: var(--mb-night-950);
+  color: var(--mb-dawn-50);
+}
+
+/* =====================================================================
+   One-pager: A4 portrait, 210 x 297 mm
+   ===================================================================== */
+.a4 {
+  width: 210mm;
+  height: 297mm;
+  font-size: 9.5pt;
+  line-height: 1.5;
+}
+.a4 .hero {
+  position: relative;
+  height: 47mm;
+  padding: 9mm 14mm 0;
+}
+.a4 .hero .logo {
+  height: 8.5mm;
+}
+.a4 .hero h1 {
+  margin-top: 6mm;
+  font-size: 34pt;
+}
+.a4 .hero .sub {
+  margin-top: 3mm;
+  font-size: 13pt;
+  line-height: 1.4;
+}
+.a4 .hero .moon {
+  position: absolute;
+  right: 18mm;
+  top: 11mm;
+  width: 15mm;
+}
+.a4 .hero .stars {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 90mm;
+  height: 60mm;
+}
+.a4 .hero .bud {
+  position: absolute;
+  right: 44mm;
+  bottom: 0;
+  height: 14mm;
+}
+.a4 .band {
+  height: 10mm;
+}
+.a4 .wave {
+  display: block;
+  width: 100%;
+  height: 7mm;
+  margin-top: -7mm;
+}
+.a4 .body {
+  padding: 5mm 14mm 0;
+}
+.a4 h2 {
+  font-size: 15pt;
+  margin-bottom: 2.5mm;
+}
+.a4 .intro p.lead {
+  font-size: 10.5pt;
+  line-height: 1.5;
+  max-width: 64em;
+}
+.a4 .intro .note {
+  margin-top: 1.5mm;
+  font-size: 9pt;
+  color: var(--mb-dusk-600);
+}
+.a4 section + section {
+  margin-top: 4.5mm;
+}
+.a4 .steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3mm;
+}
+.a4 .steps li {
+  padding: 3mm 3.5mm 3.5mm;
+  font-size: 9pt;
+  line-height: 1.45;
+}
+.a4 .steps .step {
+  font-size: 10pt;
+}
+.a4 .steps h3 {
+  font-size: 11pt;
+  margin: 0.5mm 0 1.5mm;
+}
+.a4 .steps p.b {
+  color: var(--muted);
+}
+.a4 .services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5mm;
+}
+.a4 .services li {
+  padding: 2.5mm 3.5mm 2.5mm;
+  line-height: 1.35;
+  border: 1px solid var(--mb-line-500);
+  font-size: 9pt;
+  line-height: 1.4;
+  background: var(--mb-dawn-50);
+}
+.a4 .services h3 {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+  font-size: 10.5pt;
+  margin-bottom: 0.5mm;
+}
+.a4 .services h3 img {
+  width: 5mm;
+  height: 5mm;
+  flex: none;
+}
+.a4 .services p {
+  color: var(--mb-dusk-600);
+}
+.a4 .morning {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5mm 7mm;
+  margin-top: 2mm;
+}
+.a4 .morning li {
+  display: flex;
+  align-items: center;
+  gap: 2mm;
+}
+.a4 .morning li::before {
+  content: '';
+  width: 2mm;
+  height: 2mm;
+  border-radius: 50%;
+  background: var(--mb-bloom-700);
+}
+.a4 .morning-intro {
+  font-size: 9.5pt;
+  color: var(--mb-dusk-600);
+}
+.a4 .morning h3 {
+  font-size: 10.5pt;
+}
+.a4 .morning p {
+  color: var(--mb-dusk-600);
+}
+.a4 .start {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 13mm;
+  padding: 4.5mm 14mm;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 8mm;
+}
+.a4 .start h2 {
+  font-size: 13pt;
+  margin-bottom: 1mm;
+}
+.a4 .start ol {
+  counter-reset: s;
+}
+.a4 .start ol li {
+  counter-increment: s;
+  display: grid;
+  grid-template-columns: 5mm 1fr;
+  font-size: 9pt;
+  line-height: 1.4;
+  margin-top: 1mm;
+}
+.a4 .start ol li::before {
+  content: counter(s) '.';
+  font-weight: 600;
+  color: var(--mb-bloom-700);
+}
+.a4 .contact {
+  font-size: 9pt;
+  line-height: 1.5;
+}
+.a4 .contact p {
+  color: var(--mb-dusk-600);
+}
+.a4 .contact .row {
+  display: flex;
+  gap: 5mm;
+  align-items: center;
+  margin-top: 2.5mm;
+}
+.a4 .contact .pill {
+  height: 9mm;
+  padding: 0 5mm;
+  font-size: 10pt;
+  flex: none;
+}
+.a4 .contact a:not(.pill) {
+  color: var(--mb-bloom-700);
+}
+.a4 .foot {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 13mm;
+  padding: 0 14mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 9pt;
+}
+.a4 .foot img {
+  height: 5mm;
+}
+.a4 .foot ul {
+  display: flex;
+  gap: 8mm;
+  white-space: nowrap;
+}
+.a4 .foot a {
+  color: var(--mb-apricot-300);
+}
+
+/* =====================================================================
+   Pitch deck: 16:9, 338.67 x 190.5 mm (13.333 x 7.5 in), one slide per page
+   ===================================================================== */
+.slide {
+  width: 338.67mm;
+  height: 190.5mm;
+  padding: 18mm 22mm;
+  font-size: 14pt;
+  line-height: 1.5;
+}
+.slide .corner {
+  position: absolute;
+  left: 22mm;
+  bottom: 11mm;
+  height: 7mm;
+}
+.slide .folio {
+  position: absolute;
+  right: 22mm;
+  bottom: 11mm;
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 12pt;
+  color: var(--muted);
+}
+.slide h2 {
+  font-size: 36pt;
+  max-width: 20ch;
+}
+.slide .lead {
+  font-size: 17pt;
+  line-height: 1.45;
+  max-width: 38ch;
+  color: var(--muted);
+  margin-top: 6mm;
+  text-wrap: pretty;
+}
+.slide .moon {
+  position: absolute;
+  width: 26mm;
+  right: 30mm;
+  top: 22mm;
+}
+.slide .stars {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.slide .hills {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 42mm;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
+/* title */
+.s-title .logo {
+  height: 12mm;
+}
+.s-title h1 {
+  font-size: 64pt;
+  margin-top: 22mm;
+  max-width: 11ch;
+}
+.s-title .sub {
+  font-size: 20pt;
+  margin-top: 6mm;
+}
+.s-title .bud {
+  position: absolute;
+  right: 70mm;
+  bottom: 30mm;
+  height: 34mm;
+}
+.s-title .cat {
+  position: absolute;
+  left: 22mm;
+  bottom: 13mm;
+  font-size: 13pt;
+}
+
+/* problem / idea: big statement */
+.s-statement .big {
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 380;
+  font-size: 40pt;
+  line-height: 1.12;
+  max-width: 20ch;
+  margin-top: 10mm;
+  text-wrap: balance;
+}
+.s-statement .small {
+  margin-top: 8mm;
+  max-width: 46ch;
+  color: var(--muted);
+  font-size: 15pt;
+  text-wrap: pretty;
+}
+.s-statement .art {
+  position: absolute;
+  right: 26mm;
+  bottom: 22mm;
+  width: 62mm;
+}
+.s-idea .note {
+  margin-top: 6mm;
+  font-size: 12pt;
+  color: var(--muted);
+  max-width: 60ch;
+  border-left: 1.5px solid var(--mb-night-500);
+  padding-left: 5mm;
+}
+
+/* how it works */
+.s-how .steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6mm;
+  margin-top: 12mm;
+}
+.s-how .steps li {
+  padding: 6mm 6mm 7mm;
+  font-size: 12pt;
+  line-height: 1.45;
+  min-height: 90mm;
+}
+.s-how .steps img {
+  height: 22mm;
+  margin-bottom: 4mm;
+}
+.s-how .steps .step {
+  font-size: 14pt;
+}
+.s-how .steps h3 {
+  font-size: 17pt;
+  margin: 1mm 0 3mm;
+}
+.s-how .steps p.b {
+  color: var(--muted);
+}
+
+/* lists of items (morning, principles, paths) */
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8mm;
+  margin-top: 14mm;
+}
+.grid4 li {
+  border-top: 1.5px solid var(--mb-line-500);
+  padding-top: 5mm;
+  font-size: 12.5pt;
+  line-height: 1.5;
+}
+.grid4 h3 {
+  font-size: 18pt;
+  margin-bottom: 3mm;
+}
+.grid4 p {
+  color: var(--muted);
+}
+.grid4 img {
+  height: 12mm;
+  margin-bottom: 4mm;
+}
+.grid3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* services */
+.s-services .cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5mm;
+  margin-top: 9mm;
+}
+.s-services .cards li {
+  border: 1px solid var(--mb-line-500);
+  padding: 5mm 6mm;
+  font-size: 11.5pt;
+  line-height: 1.45;
+  background: var(--mb-dawn-50);
+}
+.s-services .cards img {
+  width: 9mm;
+  height: 9mm;
+  margin-bottom: 2.5mm;
+}
+.s-services .cards h3 {
+  font-size: 15pt;
+  margin-bottom: 1.5mm;
+}
+.s-services .cards p {
+  color: var(--mb-dusk-600);
+}
+
+/* founder */
+.s-founder .cols {
+  display: grid;
+  grid-template-columns: 70mm 1fr;
+  gap: 16mm;
+  margin-top: 12mm;
+}
+.s-founder .photo {
+  height: 88mm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 6mm;
+  font-size: 12pt;
+}
+.s-founder .name {
+  font-size: 26pt;
+}
+.s-founder .role {
+  font-size: 14pt;
+  color: var(--muted);
+  margin-top: 1mm;
+}
+.s-founder .bio {
+  margin-top: 6mm;
+  font-size: 13pt;
+  max-width: 56ch;
+  text-wrap: pretty;
+}
+.s-founder .bio + .bio {
+  margin-top: 4mm;
+  color: var(--muted);
+}
+
+/* path to production */
+.s-path .paths {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6mm;
+  margin-top: 12mm;
+}
+.s-path .paths li {
+  padding: 7mm 6mm;
+  font-size: 12.5pt;
+  line-height: 1.45;
+}
+.s-path .paths h3 {
+  font-size: 18pt;
+  margin-bottom: 2mm;
+}
+.s-path .paths p {
+  color: var(--muted);
+}
+
+/* next step */
+.s-next h2 {
+  font-size: 48pt;
+}
+.s-next .pill {
+  height: 15mm;
+  padding: 0 8mm;
+  font-size: 15pt;
+  margin-top: 10mm;
+}
+.s-next .flower {
+  position: absolute;
+  right: 34mm;
+  top: 26mm;
+  width: 78mm;
+}
+.s-next .contact {
+  margin-top: 12mm;
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: start;
+  gap: 2mm 10mm;
+  font-size: 13pt;
+}
+.s-next .contact dt {
+  color: var(--muted);
+}
+.s-next .contact dd {
+  margin: 0;
+}
+.s-next .contact a {
+  color: var(--mb-bloom-700);
+}
+.s-next .next {
+  margin-top: 9mm;
+  font-size: 12.5pt;
+  color: var(--muted);
+  max-width: 60ch;
+}
+
+/* page sizes (named pages: Chromium honours them with preferCSSPageSize) */
+@page a4 {
+  size: 210mm 297mm;
+  margin: 0;
+}
+@page slide {
+  size: 338.67mm 190.5mm;
+  margin: 0;
+}
+.a4 {
+  page: a4;
+}
+.slide {
+  page: slide;
+}

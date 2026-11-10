@@ -1,0 +1,377 @@
+{
+  "$comment": "Moonbloom Labs colour tokens. Source of truth: docs/plan/design.md section 4. CMYK is a naive RGB conversion for orientation only; proof print colours on the target press. Decorative colours never carry or sit behind text.",
+  "tokens": [
+    {
+      "name": "night-950",
+      "hex": "#0F1433",
+      "rgb": [15, 20, 51],
+      "cmyk_approx": [71, 61, 0, 80],
+      "role": "Base night: header, hero, footer; text colour on dawn; primary button fill on dawn"
+    },
+    {
+      "name": "night-900",
+      "hex": "#171D47",
+      "rgb": [23, 29, 71],
+      "cmyk_approx": [68, 59, 0, 72],
+      "role": "Raised night surface: mobile nav panel"
+    },
+    {
+      "name": "night-800",
+      "hex": "#222A5C",
+      "rgb": [34, 42, 92],
+      "cmyk_approx": [63, 54, 0, 64],
+      "role": "Deep-night section (How it works, The problem); primary button hover on dawn"
+    },
+    {
+      "name": "night-500",
+      "hex": "#7A84C0",
+      "rgb": [122, 132, 192],
+      "cmyk_approx": [36, 31, 0, 25],
+      "role": "UI borders on night (inputs if ever on night, nav panel divider)"
+    },
+    {
+      "name": "moon-100",
+      "hex": "#EEF0FA",
+      "rgb": [238, 240, 250],
+      "cmyk_approx": [5, 4, 0, 2],
+      "role": "Primary text on night; moon illustration"
+    },
+    {
+      "name": "mist-300",
+      "hex": "#B9C0E4",
+      "rgb": [185, 192, 228],
+      "cmyk_approx": [19, 16, 0, 11],
+      "role": "Secondary text on night; stars"
+    },
+    {
+      "name": "apricot-300",
+      "hex": "#F5B98A",
+      "rgb": [245, 185, 138],
+      "cmyk_approx": [0, 24, 44, 4],
+      "role": "First light: primary button fill on night, links on night, focus ring on night"
+    },
+    {
+      "name": "apricot-200",
+      "hex": "#F9CFAB",
+      "rgb": [249, 207, 171],
+      "cmyk_approx": [0, 17, 31, 2],
+      "role": "Primary button hover on night"
+    },
+    {
+      "name": "dawn-50",
+      "hex": "#FDF3EC",
+      "rgb": [253, 243, 236],
+      "cmyk_approx": [0, 4, 7, 1],
+      "role": "Main dawn surface (reading, forms)"
+    },
+    {
+      "name": "dawn-100",
+      "hex": "#FAE6D8",
+      "rgb": [250, 230, 216],
+      "cmyk_approx": [0, 8, 14, 2],
+      "role": "Alternate dawn surface, morning step tiles"
+    },
+    {
+      "name": "dawn-200",
+      "hex": "#F6D5C2",
+      "rgb": [246, 213, 194],
+      "cmyk_approx": [0, 13, 21, 4],
+      "role": "Sunrise surface (final CTA)"
+    },
+    {
+      "name": "dusk-600",
+      "hex": "#4B4A6E",
+      "rgb": [75, 74, 110],
+      "cmyk_approx": [32, 33, 0, 57],
+      "role": "Secondary text on dawn, helper text"
+    },
+    {
+      "name": "bloom-700",
+      "hex": "#8C2E55",
+      "rgb": [140, 46, 85],
+      "cmyk_approx": [0, 67, 39, 45],
+      "role": "Links on dawn, focus ring on dawn, petal outline ink"
+    },
+    {
+      "name": "line-500",
+      "hex": "#7D7290",
+      "rgb": [125, 114, 144],
+      "cmyk_approx": [13, 21, 0, 44],
+      "role": "Input borders and dividers that carry meaning on dawn"
+    },
+    {
+      "name": "white",
+      "hex": "#FFFFFF",
+      "rgb": [255, 255, 255],
+      "cmyk_approx": [0, 0, 0, 0],
+      "role": "Input field fill"
+    },
+    {
+      "name": "error-700",
+      "hex": "#A1262B",
+      "rgb": [161, 38, 43],
+      "cmyk_approx": [0, 76, 73, 37],
+      "role": "Error text and error border on dawn"
+    },
+    {
+      "name": "error-300",
+      "hex": "#FF9C8F",
+      "rgb": [255, 156, 143],
+      "cmyk_approx": [0, 39, 44, 0],
+      "role": "Error text on night (reserved; no forms on night at launch)"
+    },
+    {
+      "name": "success-700",
+      "hex": "#2D6A4F",
+      "rgb": [45, 106, 79],
+      "cmyk_approx": [58, 0, 25, 58],
+      "role": "Success text and icon on dawn"
+    }
+  ],
+  "decorative": [
+    {
+      "name": "petal-100",
+      "hex": "#FBE9EF",
+      "rgb": [251, 233, 239],
+      "cmyk_approx": [0, 7, 5, 2],
+      "role": "Decorative only: outer moonflower petals",
+      "decorative": true
+    },
+    {
+      "name": "petal-300",
+      "hex": "#F2BFD0",
+      "rgb": [242, 191, 208],
+      "cmyk_approx": [0, 21, 14, 5],
+      "role": "Decorative only: inner petals, bud side petals on night",
+      "decorative": true
+    },
+    {
+      "name": "leaf-500",
+      "hex": "#5F8A72",
+      "rgb": [95, 138, 114],
+      "cmyk_approx": [31, 0, 17, 46],
+      "role": "Decorative only: stems and leaves",
+      "decorative": true
+    },
+    {
+      "name": "horizon-1",
+      "hex": "#222A5C",
+      "rgb": [34, 42, 92],
+      "cmyk_approx": [63, 54, 0, 64],
+      "role": "Decorative only: horizon gradient stop 1 (= night-800)",
+      "decorative": true
+    },
+    {
+      "name": "horizon-2",
+      "hex": "#5B4A86",
+      "rgb": [91, 74, 134],
+      "cmyk_approx": [32, 45, 0, 47],
+      "role": "Decorative only: horizon gradient stop 2",
+      "decorative": true
+    },
+    {
+      "name": "horizon-3",
+      "hex": "#C98BA0",
+      "rgb": [201, 139, 160],
+      "cmyk_approx": [0, 31, 20, 21],
+      "role": "Decorative only: horizon gradient stop 3",
+      "decorative": true
+    },
+    {
+      "name": "horizon-4",
+      "hex": "#F6D5C2",
+      "rgb": [246, 213, 194],
+      "cmyk_approx": [0, 13, 21, 4],
+      "role": "Decorative only: horizon gradient stop 4 (= dawn-200)",
+      "decorative": true
+    },
+    {
+      "name": "horizon-5",
+      "hex": "#FDF3EC",
+      "rgb": [253, 243, 236],
+      "cmyk_approx": [0, 4, 7, 1],
+      "role": "Decorative only: horizon gradient stop 5 (= dawn-50)",
+      "decorative": true
+    }
+  ],
+  "horizon_gradient": {
+    "stops": ["#222A5C", "#5B4A86", "#C98BA0", "#F6D5C2", "#FDF3EC"],
+    "rule": "Decorative bands only (aria-hidden), never behind text."
+  },
+  "approved_text_pairs": [
+    {
+      "text": "moon-100",
+      "background": "night-950",
+      "ratio": 15.82,
+      "aa": "AAA"
+    },
+    {
+      "text": "moon-100",
+      "background": "night-900",
+      "ratio": 14.18,
+      "aa": "AAA"
+    },
+    {
+      "text": "moon-100",
+      "background": "night-800",
+      "ratio": 11.89,
+      "aa": "AAA"
+    },
+    {
+      "text": "mist-300",
+      "background": "night-950",
+      "ratio": 10.04,
+      "aa": "AAA"
+    },
+    {
+      "text": "mist-300",
+      "background": "night-900",
+      "ratio": 9,
+      "aa": "AAA"
+    },
+    {
+      "text": "mist-300",
+      "background": "night-800",
+      "ratio": 7.55,
+      "aa": "AAA"
+    },
+    {
+      "text": "apricot-300",
+      "background": "night-950",
+      "ratio": 10.43,
+      "aa": "AAA"
+    },
+    {
+      "text": "apricot-300",
+      "background": "night-900",
+      "ratio": 9.35,
+      "aa": "AAA"
+    },
+    {
+      "text": "apricot-300",
+      "background": "night-800",
+      "ratio": 7.84,
+      "aa": "AAA"
+    },
+    {
+      "text": "night-950",
+      "background": "apricot-300",
+      "ratio": 10.43,
+      "aa": "AAA"
+    },
+    {
+      "text": "night-950",
+      "background": "apricot-200",
+      "ratio": 12.45,
+      "aa": "AAA"
+    },
+    {
+      "text": "error-300",
+      "background": "night-950",
+      "ratio": 8.91,
+      "aa": "AAA"
+    },
+    {
+      "text": "night-950",
+      "background": "dawn-50",
+      "ratio": 16.44,
+      "aa": "AAA"
+    },
+    {
+      "text": "night-950",
+      "background": "dawn-100",
+      "ratio": 14.87,
+      "aa": "AAA"
+    },
+    {
+      "text": "night-950",
+      "background": "dawn-200",
+      "ratio": 13.02,
+      "aa": "AAA"
+    },
+    {
+      "text": "night-950",
+      "background": "white",
+      "ratio": 17.98,
+      "aa": "AAA"
+    },
+    {
+      "text": "dusk-600",
+      "background": "dawn-50",
+      "ratio": 7.67,
+      "aa": "AAA"
+    },
+    {
+      "text": "dusk-600",
+      "background": "dawn-100",
+      "ratio": 6.94,
+      "aa": "AA"
+    },
+    {
+      "text": "dusk-600",
+      "background": "dawn-200",
+      "ratio": 6.08,
+      "aa": "AA"
+    },
+    {
+      "text": "dusk-600",
+      "background": "white",
+      "ratio": 8.39,
+      "aa": "AAA"
+    },
+    {
+      "text": "bloom-700",
+      "background": "dawn-50",
+      "ratio": 7.28,
+      "aa": "AAA"
+    },
+    {
+      "text": "bloom-700",
+      "background": "dawn-100",
+      "ratio": 6.59,
+      "aa": "AA"
+    },
+    {
+      "text": "bloom-700",
+      "background": "dawn-200",
+      "ratio": 5.77,
+      "aa": "AA"
+    },
+    {
+      "text": "dawn-50",
+      "background": "night-950",
+      "ratio": 16.44,
+      "aa": "AAA"
+    },
+    {
+      "text": "dawn-50",
+      "background": "night-800",
+      "ratio": 12.36,
+      "aa": "AAA"
+    },
+    {
+      "text": "error-700",
+      "background": "dawn-50",
+      "ratio": 6.79,
+      "aa": "AA"
+    },
+    {
+      "text": "error-700",
+      "background": "dawn-100",
+      "ratio": 6.14,
+      "aa": "AA"
+    },
+    {
+      "text": "error-700",
+      "background": "white",
+      "ratio": 7.43,
+      "aa": "AAA"
+    },
+    {
+      "text": "success-700",
+      "background": "dawn-50",
+      "ratio": 5.85,
+      "aa": "AA"
+    }
+  ]
+}
